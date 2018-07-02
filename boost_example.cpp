@@ -72,49 +72,57 @@ graph_t graph;
 std::vector<vertex_t> vertices;
 
 
-std::vector<bool> visited(10000, false);
-std::vector<int> r_index(100000, 0);
-std::vector<bool> inComponent(10000, false);
+std::vector<bool> visited(10, false);
+std::vector<int> r_index(10, 0);
+std::vector<bool> inComponent(10, false);
 std::stack<int> S;
 int vindex = 0;
 int c = 0; // component number
 
-void pearce_strong_components(int v) 
+void visit(int v) 
 {
   bool root = true;
   visited[v] = true;
-  // std::cout<<"\n Check! \n"<<visited[v]<<"\n";
-  r_index[v] = vindex; 
-  vindex++;
+  r_index[v] = vindex;
+  vindex = vindex + 1;
   inComponent[v] = false;
 
-  std::vector<edge_t> temp_edges;
   auto edges = boost::edges(graph);
-      
+  
 
   for (auto it = edges.first; it != edges.second; ++it){
-    if (!visited[boost::target(*it, graph)]) {
-      pearce_strong_components(boost::target(*it, graph));
-    }
-    if (inComponent[boost::target(*it, graph)] && r_index[boost::target(*it, graph)] < r_index[v])
+    int w = boost::target(*it, graph);
+    int s = boost::source(*it, graph);
+
+    if (v == s)
     {
-      r_index[v] = r_index[boost::target(*it, graph)];
-      root = false;
+      std::cout<<"\n Visit for node: " << v << ", edge: "<< s  << "->"<< w << "\n";
+      
+      if (!visited[w]) {
+        visit(w);
+      }
+      std::cout<<"\n----- rindex (w)=  " << r_index[w] << "  r_i(v)= " << r_index[v] <<"\n";
+      std::cout<<"----- incomp " << inComponent[w];
+      
+      if (!(inComponent[w]) && (r_index[w] < r_index[v]))
+      {
+        r_index[v] = r_index[w];
+        root = false;
+      }
     }
   }
 
   if (root) {
-    std::cout<<"\n V = "<< v<< "\n";
+    std::cout<<"\n-----ROOT  \n";
     inComponent[v] = true;
     while( !S.empty() && r_index[v] <= r_index[S.top()]) {
       int w = S.top();
       S.pop();
       r_index[w] = c;
-      c++;
       inComponent[w] = true;
     }
     r_index[v] = c;
-    c++;
+    c = c + 1;
   } else  { 
     S.push(v);
   }
@@ -125,17 +133,34 @@ void pearce_strong_components(int v)
 //==============================================================================
 int main() {
 
+///graph 1
 
-  vertices.push_back(boost::add_vertex(graph));
+  // vertices.push_back(boost::add_vertex(graph));
+  // vertices.push_back(boost::add_vertex(graph));
+  // vertices.push_back(boost::add_vertex(graph));
+  // vertices.push_back(boost::add_vertex(graph));
+  // vertices.push_back(boost::add_vertex(graph));
+  // vertices.push_back(boost::add_vertex(graph));
+
+  // boost::add_edge(vertices.at(0), vertices.at(1), graph);
+  // boost::add_edge(vertices.at(1), vertices.at(2), graph);
+  // boost::add_edge(vertices.at(2), vertices.at(0), graph);  
+  // boost::add_edge(vertices.at(2), vertices.at(3), graph);  
+  // boost::add_edge(vertices.at(3), vertices.at(4), graph);
+  // boost::add_edge(vertices.at(4), vertices.at(5), graph);
+  // boost::add_edge(vertices.at(5), vertices.at(3), graph);
+  
+
+  //graph2
   vertices.push_back(boost::add_vertex(graph));
   vertices.push_back(boost::add_vertex(graph));
   vertices.push_back(boost::add_vertex(graph));
   vertices.push_back(boost::add_vertex(graph));
 
   boost::add_edge(vertices.at(0), vertices.at(1), graph);
-  boost::add_edge(vertices.at(0), vertices.at(2), graph);
-  boost::add_edge(vertices.at(1), vertices.at(2), graph);
-  boost::add_edge(vertices.at(4), vertices.at(3), graph);
+  boost::add_edge(vertices.at(2), vertices.at(3), graph);
+  boost::add_edge(vertices.at(3), vertices.at(2), graph);
+
 
   graph[boost::graph_bundle].number_of_components = 
   boost::connected_components(graph, 
@@ -145,11 +170,26 @@ int main() {
   print_graph(graph);
   print_components(graph);
 
+  
+  for (int i = 0; i < 4; i++) { 
+    if (!visited[i])
+    {
+      visit(i);
+    }
+  }
+  // visit(0);
+  
+  std::cout << "\n Components number: ----------" << c << std::endl;
+  std::cout << "r_index: ----------" << std::endl;
+  for (auto i = r_index.begin(); i != r_index.end(); ++i)
+    std::cout << *i << ' ';
+    std::cout << "\n inComponent: ----------" << std::endl;
+  for (auto i = inComponent.begin(); i != inComponent.end(); ++i)
+    std::cout << *i << ' ';
+
   strong_components(graph);
-  pearce_strong_components(0);
 
-
-  std::cout << "\nWith additional edges:\n----------------------" << std::endl;
+  std::cout << "\nTrue: \n----------------------" << std::endl;
   print_graph(graph);  
   print_components(graph);
 }
