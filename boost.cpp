@@ -122,12 +122,15 @@ void visit(int v)
       {
         visit(w);
       }
+      std::cout << "\n r_index after: ----------" << std::endl;
+      for (auto i = r_index.begin(); i != r_index.end(); ++i)
+        std::cout << *i << ' ';
       std::cout << "\n----- w=  " << w << "-----rindex(w) = " << r_index[w] << "\n----- v=  " << v << " rindex(v) = " << r_index[v] << "\n ";
       std::cout
           << "----- incomp[w]" << inComponent[w];
       bool testt = !(inComponent[w]) && (r_index[w] < r_index[v]);
       std::cout << "\n Im checking stuff for vertex: " << testt << "\n";
-      if (!(inComponent[w]) && (r_index[w] > r_index[v]))
+      if (!(!inComponent[w]) && (r_index[w] < r_index[v]))
       {
         std::cout << "\n This root is not root: " << v << "\n";
         r_index[v] = r_index[w];
