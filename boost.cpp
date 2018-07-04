@@ -99,9 +99,9 @@ void visit(int v)
   r_index[v] = vindex;
   vindex = vindex + 1;
   inComponent[v] = false;
-  std::cout << "----- r_index[v] : " << r_index[v];
-  std::cout << "----- vindex : " << vindex;
-  std::cout << "r_index: ----------" << std::endl;
+  std::cout << "\n ----- r_index[v] : " << r_index[v] << "\n";
+  std::cout << "\n ----- vindex : " << vindex << "\n";
+  std::cout << "\n r_index: ----------" << std::endl;
   for (auto i = r_index.begin(); i != r_index.end(); ++i)
     std::cout << *i << ' ';
   auto edges = boost::edges(graph);
@@ -129,17 +129,16 @@ void visit(int v)
       std::cout << "\n Im checking stuff for vertex: " << testt << "\n";
       if (!(inComponent[w]) && (r_index[w] > r_index[v]))
       {
-        std::cout << "\n Im checking stuff for vertex: " << v << "\n";
+        std::cout << "\n This root is not root: " << v << "\n";
         r_index[v] = r_index[w];
         root = false;
       }
     }
   }
+
   if (root)
   {
     inComponent[v] = true;
-    std::cout << "\n----- r_index[v]=  " << r_index[v];
-
     while (!S.empty() && r_index[v] <= r_index[S.top()])
     {
       std::cout << "\n Im  vertex root: " << v << "\n";
