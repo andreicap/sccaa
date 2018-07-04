@@ -76,14 +76,14 @@ void strong_components(graph_t &graph)
     boost::remove_edge(e, graph);
   }
 }
-// visit pearce
-//
-//
+
+//==============================================================================
 
 graph_t graph;
 std::vector<vertex_t> vertices;
 
 int nn = 10;
+
 std::vector<bool> visited(nn, false);
 std::vector<int> r_index(nn, 0);
 std::vector<bool> inComponent(nn, false);
@@ -93,69 +93,53 @@ int c = 0; // component number
 
 void visit(int v)
 {
-  std::cout << "\n I'm visiting vertex: " << v << "\n";
   bool root = true;
   visited[v] = true;
   r_index[v] = vindex;
   vindex = vindex + 1;
   inComponent[v] = false;
-  std::cout << "\n ----- r_index[v] : " << r_index[v] << "\n";
-  std::cout << "\n ----- vindex : " << vindex << "\n";
-  std::cout << "\n r_index: ----------" << std::endl;
-  for (auto i = r_index.begin(); i != r_index.end(); ++i)
-    std::cout << *i << ' ';
   auto edges = boost::edges(graph);
-
   for (auto it = edges.first; it != edges.second; ++it)
   {
     int w = boost::target(*it, graph);
     int s = boost::source(*it, graph);
-    // only visit if there anything to be visited :=
+
     if (v == s)
     {
-
-      //std::cout << "\n----- rindex (w)=  " << r_index[w] << "  r_i(v)= " << r_index[v] << "\n";
-      //std::cout << "----- incomp " << inComponent[w];
-      //
       std::cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
       if (!visited[w])
       {
         visit(w);
       }
-      std::cout << "\n r_index after: ----------" << std::endl;
+
       for (auto i = r_index.begin(); i != r_index.end(); ++i)
-        std::cout << *i << ' ';
-      std::cout << "\n----- w=  " << w << "-----rindex(w) = " << r_index[w] << "\n----- v=  " << v << " rindex(v) = " << r_index[v] << "\n ";
-      std::cout
-          << "----- incomp[w]" << inComponent[w];
-      bool testt = !(inComponent[w]) && (r_index[w] < r_index[v]);
-      std::cout << "\n Im checking stuff for vertex: " << testt << "\n";
-      if (!(!inComponent[w]) && (r_index[w] < r_index[v]))
-      {
-        std::cout << "\n This root is not root: " << v << "\n";
-        r_index[v] = r_index[w];
-        root = false;
-      }
+        //bool check = !(inComponent[w]) && (r_index[w] < r_index[v]);
+        if (!(inComponent[w]) && (r_index[w] < r_index[v]))
+        {
+          r_index[v] = r_index[w];
+          root = false;
+        }
     }
   }
 
   if (root)
   {
     inComponent[v] = true;
-    while (!S.empty() && r_index[v] <= r_index[S.top()])
+    while (!S.empty())
     {
-      std::cout << "\n Im  vertex root: " << v << "\n";
-      int w = S.top();
-      S.pop();
-      r_index[w] = c;
-      inComponent[w] = true;
+      while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
+      {
+        int w = S.top();
+        S.pop();
+        r_index[w] = c;
+        inComponent[w] = true;
+      }
     }
     r_index[v] = c;
     c = c + 1;
   }
   else
   {
-    std::cout << "\n Im NOT in  vertex root: " << v << "\n";
     S.push(v);
   }
 }
@@ -192,14 +176,27 @@ int main()
   vertices.push_back(boost::add_vertex(graph));
   vertices.push_back(boost::add_vertex(graph));
   vertices.push_back(boost::add_vertex(graph));
-
+  boost::add_edge(vertices.at(0), vertices.at(4), graph);
+  boost::add_edge(vertices.at(0), vertices.at(1), graph);
+  boost::add_edge(vertices.at(4), vertices.at(0), graph);
+  boost::add_edge(vertices.at(4), vertices.at(1), graph);
+  boost::add_edge(vertices.at(4), vertices.at(5), graph);
+  boost::add_edge(vertices.at(5), vertices.at(6), graph);
+  boost::add_edge(vertices.at(6), vertices.at(4), graph);
+  boost::add_edge(vertices.at(1), vertices.at(2), graph);
+  boost::add_edge(vertices.at(2), vertices.at(7), graph);
+  boost::add_edge(vertices.at(2), vertices.at(3), graph);
+  boost::add_edge(vertices.at(3), vertices.at(1), graph);
+  boost::add_edge(vertices.at(8), vertices.at(9), graph);
+  boost::add_edge(vertices.at(9), vertices.at(8), graph);
+  /*
   boost::add_edge(vertices.at(0), vertices.at(1), graph);
   boost::add_edge(vertices.at(2), vertices.at(3), graph);
   boost::add_edge(vertices.at(3), vertices.at(4), graph);
   boost::add_edge(vertices.at(4), vertices.at(5), graph);
   boost::add_edge(vertices.at(7), vertices.at(8), graph);
   boost::add_edge(vertices.at(8), vertices.at(9), graph);
-  boost::add_edge(vertices.at(9), vertices.at(7), graph);
+  boost::add_edge(vertices.at(9), vertices.at(7), graph);*/
   boost::mt19937 rng;
   //boost::generate_random_graph(graph, nn, 8, rng);
   size_t e = boost::num_edges(graph);
@@ -210,10 +207,6 @@ int main()
       boost::connected_components(graph,
                                   boost::get(&node_properties::component, graph));
 
-  //std::cout << "Without adaption:\n-----------------" << std::endl;
-  //print_graph(graph);
-  //print_components(graph);
-
   for (int i = 0; i < nn; i++)
   {
     if (!visited[i])
@@ -221,9 +214,9 @@ int main()
       visit(i);
     }
   }
-  // visit(0);
 
-  std::cout << "\n Components number SCC1: ----------" << c << std::endl;
+  std::cout
+      << "\n Components number SCC1: ----------" << c << std::endl;
   std::cout << "r_index: ----------" << std::endl;
   for (auto i = r_index.begin(); i != r_index.end(); ++i)
     std::cout << *i << ' ';
