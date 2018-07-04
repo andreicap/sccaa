@@ -139,7 +139,6 @@ void visit(int v)
   {
     inComponent[v] = true;
     std::cout << "\n----- r_index[v]=  " << r_index[v];
-    int ttt = r_index[S.top()];
 
     while (!S.empty() && r_index[v] <= r_index[S.top()])
     {
