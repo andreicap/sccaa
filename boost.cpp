@@ -106,7 +106,7 @@ void visit(int v)
 
     if (v == s)
     {
-      std::cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
+      //std::cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
       if (!visited[w])
       {
         visit(w);
@@ -215,20 +215,13 @@ int main()
     }
   }
 
-  std::cout
-      << "\n Components number SCC1: ----------" << c << std::endl;
-  std::cout << "r_index: ----------" << std::endl;
+  //std::cout
+  //    << "\n Components number SCC1: ----------" << c << std::endl;
   for (auto i = r_index.begin(); i != r_index.end(); ++i)
     std::cout << *i << ' ';
-  std::cout << "\n inComponent: ----------" << std::endl;
-  for (auto i = inComponent.begin(); i != inComponent.end(); ++i)
-    std::cout << *i << ' ';
-  std::cout << "\n visited: ----------" << std::endl;
-  for (auto i = visited.begin(); i != visited.end(); ++i)
-    std::cout << *i << ' ';
-  std::cout << "\n ***************************************" << std::endl;
-  std::cout << "\nTrue boost graph implementation : \n----------------------" << std::endl;
+  //std::cout << "\n ***************************************" << std::endl;
+  //std::cout << "\nTrue boost graph implementation : \n----------------------" << std::endl;
   strong_components(graph);
-  print_graph(graph);
-  print_components(graph);
+  //print_graph(graph);
+  //print_components(graph);
 }
