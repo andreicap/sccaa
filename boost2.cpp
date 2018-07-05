@@ -7,6 +7,19 @@
 #include <iostream>
 #include <vector>
 
+//==============================================================================
+struct node_properties
+{
+    int component;
+};
+struct edge_properties
+{
+};
+struct graph_properties
+{
+    int number_of_components;
+};
+
 //--------------------------------------
 typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::directedS,
                               node_properties, edge_properties, graph_properties>
@@ -63,7 +76,9 @@ void strong_components(graph_t &graph)
         boost::remove_edge(e, graph);
     }
 }
+
 //==============================================================================
+
 graph_t graph;
 std::vector<vertex_t> vertices;
 
@@ -78,8 +93,6 @@ void visit(int v)
     bool root = true;
     r_index[v] = vindex;
     vindex = vindex + 1;
-    for (auto i = r_index.begin(); i != r_index.end(); ++i)
-        std::cout << *i << ' ';
     auto edges = boost::edges(graph);
     for (auto it = edges.first; it != edges.second; ++it)
     {
@@ -87,7 +100,7 @@ void visit(int v)
         int s = boost::source(*it, graph);
         if (v == s)
         {
-            std::cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
+            // std::cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
             if (r_index[w] == 0)
             {
                 visit(w);
@@ -95,21 +108,24 @@ void visit(int v)
             if (r_index[w] < r_index[v])
 
             {
+                r_index[v] = r_index[w];
                 root = false;
             }
         }
     }
-
     if (root)
     {
         vindex = vindex - 1;
-        while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
+        std::cout << "scc: ";
+        while (!S.empty() && (r_index[v] <= r_index[S.top()]))
         {
             int w = S.top();
             S.pop();
+            std::cout << "" << w;
             r_index[w] = c;
             vindex = vindex - 1;
         }
+        std::cout << v << "\n";
         r_index[v] = c;
         c = c - 1;
     }
@@ -164,16 +180,16 @@ int main()
     boost::add_edge(vertices.at(3), vertices.at(1), graph);
     boost::add_edge(vertices.at(8), vertices.at(9), graph);
     boost::add_edge(vertices.at(9), vertices.at(8), graph);
-
-    /* boost::add_edge(vertices.at(0), vertices.at(1), graph);
-    boost::add_edge(vertices.at(2), vertices.at(3), graph);
-    boost::add_edge(vertices.at(3), vertices.at(4), graph);
-    boost::add_edge(vertices.at(4), vertices.at(5), graph);
-    boost::add_edge(vertices.at(7), vertices.at(8), graph);
-    boost::add_edge(vertices.at(8), vertices.at(9), graph);
-    boost::add_edge(vertices.at(9), vertices.at(7), graph);*/
+    /*
+  boost::add_edge(vertices.at(0), vertices.at(1), graph);
+  boost::add_edge(vertices.at(2), vertices.at(3), graph);
+  boost::add_edge(vertices.at(3), vertices.at(4), graph);
+  boost::add_edge(vertices.at(4), vertices.at(5), graph);
+  boost::add_edge(vertices.at(7), vertices.at(8), graph);
+  boost::add_edge(vertices.at(8), vertices.at(9), graph);
+  boost::add_edge(vertices.at(9), vertices.at(7), graph);*/
     boost::mt19937 rng;
-    boost::generate_random_graph(graph, nn, 8, rng);
+    //boost::generate_random_graph(graph, nn, 8, rng);
     size_t e = boost::num_edges(graph);
     size_t n = boost::num_vertices(graph);
     std::cout << "generated " << e << " edges, " << n << " vertices\n";
@@ -182,17 +198,21 @@ int main()
         boost::connected_components(graph,
                                     boost::get(&node_properties::component, graph));
 
-    //std::cout << "Without adaption:\n-----------------" << std::endl;
-    //print_graph(graph);
-    //print_components(graph);
-    visit(0);
+    for (int i = 0; i < nn; i++)
+    {
+        if (r_index[i] == 0)
+        {
+            visit(i);
+        }
+    }
 
     std::cout
-        << "\n Components number SCC1: ----------" << c << std::endl;
-    std::cout << "r_index: ----------" << std::endl;
+        << "\n Components number SCC1: ----------" << c - 1 << "\n"
+        << std::endl;
     for (auto i = r_index.begin(); i != r_index.end(); ++i)
         std::cout << *i << ' ';
-    std::cout << "\nTrue boost graph implementation : \n----------------------" << std::endl;
+    //std::cout << "\n ***************************************" << std::endl;
+    //std::cout << "\nTrue boost graph implementation : \n----------------------" << std::endl;
     //strong_components(graph);
     //print_graph(graph);
     //print_components(graph);
