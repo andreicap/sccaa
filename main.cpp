@@ -1,5 +1,6 @@
 #include "definitions.hpp"
 #include "pearce_recursive_1.hpp"
+#include "tarjan.hpp"
 
 
 int main(int argc, char const *argv[])
@@ -7,7 +8,7 @@ int main(int argc, char const *argv[])
   graph_t g;
   vector<vertex_t> vertices;
 
-  int v_number = 15;
+  int v_number = 5;
   int e_number = v_number*2;
   boost::mt19937 rng;
   rng.seed(uint32_t(time(0)));
@@ -22,6 +23,9 @@ int main(int argc, char const *argv[])
   
   //pearce recursive first implementation
   pr1 (g);
+
+  //tarjan
+  tarjan_recursive(g);
 
   return 0;
   
