@@ -55,7 +55,7 @@ void nuutila(int v)
             }
             if (!inComponent[w])
             {
-                root[v] = std::min(root[v], root[w]);
+                root[v] = min(root[v], root[w]);
             }
         }
     }
@@ -68,10 +68,10 @@ void nuutila(int v)
 
             int w = S.top();
             S.pop();
-            std::cout << " "<< w <<;
+            cout << " "<< w <<;
             inComponent[w] = true;
         }
-        std::cout << " " << v << "\n";
+        cout << " " << v << "\n";
     }
     else
     {
