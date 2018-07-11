@@ -1,18 +1,20 @@
 #ifndef PEARCE_REC_1
 #define PEARCE_REC_1
 
+void pearce_recursive_1(int v);
 
 void pr1(graph_t graph_local)
 {
   g = &graph_local;
   size_t nn = boost::num_vertices(graph_local);  
 
+  visited.resize(0);
   visited.resize(nn, false); 
   r_index.resize(nn, 0);
   inComponent.resize(nn, false);
   vindex = 0;
   c = 0; 
-
+  S = stack<int>();
   for (int i = 0; i < nn; i++)
   {
     if (!visited[i])

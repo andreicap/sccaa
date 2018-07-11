@@ -1,7 +1,7 @@
 #include "definitions.hpp"
 #include "pearce_recursive_1.hpp"
 #include "tarjan.hpp"
-
+#include "nuutila.hpp"
 
 int main(int argc, char const *argv[])
 {
@@ -20,13 +20,15 @@ int main(int argc, char const *argv[])
   print_graph(g);
   //boost implementation
   readSCC(g);
+
+  nuutila_recursive(g);
   
   //pearce recursive first implementation
-  pr1 (g);
+ 
 
   //tarjan
   tarjan_recursive(g);
-
+  pr1 (g);
   return 0;
   
 }

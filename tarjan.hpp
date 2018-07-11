@@ -17,8 +17,9 @@ void tarjan_recursive(graph_t graph_local)
   root.resize(nn, 0);
   inComponent.resize(0);
   inComponent.resize(nn, false);
+  S = stack<int>();
   vindex = 0;
-  c = 0; 
+  c = 0;
 
 
   cout << "\nTarjan recursive::components: " <<  endl;
@@ -41,13 +42,13 @@ void tarjan_recursive(graph_t graph_local)
   {
     if (!visited[i])
     {
-      cout<<"node="<<i<<endl;
       tarjan(i);
     }
   }
   cout<<endl;
 }
 int iter = 0;
+
 void tarjan(int v)
 {
   
@@ -82,7 +83,7 @@ void tarjan(int v)
       inComponent[w] = true;
       cout << " " << w;
     }
-    cout << " " <<v << "\n";
+    cout << " " << v << "\n";
     iter++;
   }
 }

@@ -40,13 +40,13 @@ typedef typename boost::graph_traits<graph_t>::edge_descriptor edge_t;
 
 
 
-vector<bool> visited(1, false);
-vector<int> r_index(1, 0);
-vector<bool> inComponent(1, false);
+vector<bool> visited;
+vector<int> r_index;
+vector<bool> inComponent;
 stack<int> S;
-int vindex = 0;
-int c = 0; // component number.
-void pearce_recursive_1(int v);
+int vindex;
+int c; // component number.
+
 graph_t *g;
 
 
