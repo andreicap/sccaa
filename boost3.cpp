@@ -4,6 +4,7 @@
 #include <boost/graph/random.hpp>
 #include <boost/random.hpp>
 #include <stack>
+#include <deque>
 #include <iostream>
 #include <vector>
 
@@ -38,15 +39,15 @@ int nn = 10;
 
 std::vector<int> r_index(nn, 0);
 std::vector<int> root(nn, 0);
-std::stack<int> vS;
-std::stack<int> iS;
+std::deque<int> vS;
+std::deque<int> iS;
 int vindex = 1;
 int c = nn - 1; // component number
 
 void beginVisiting(int v)
 { // total: n(1 + 2w)
-    vS.push(v);
-    iS.push(0);
+    vS.push_front(v);
+    iS.push_front(0);
     root[v] = true;
     r_index[v] = vindex;
     vindex = vindex + 1;
@@ -54,17 +55,17 @@ void beginVisiting(int v)
 
 void finishVisiting(int v)
 {
-    // Take this vertex off the call stack
-    vS.pop();
-    iS.pop();
+    // Take this vertex off the call stacks
+    vS.pop_front();
+    iS.pop_front();
     // Update component information
     if (root[v])
     {
         vindex = vindex - 1;
-        while (!vS.empty() && (r_index[v] <= r_index[vS.top()]))
+        while (!vS.empty() && (r_index[v] <= r_index[vS.back()]))
         {
-            int w = vS.top();
-            vS.pop();
+            int w = vS.back();
+            vS.pop_back();
             r_index[w] = c;
             vindex = vindex - 1;
         }
@@ -73,14 +74,12 @@ void finishVisiting(int v)
     }
     else
     {
-        vS.push(v);
+        vS.push_back(v);
     }
 }
 
 bool beginEdge(int v, int k)
 {
-    //int[] g_edges = graph.edges(v);
-    //int w = g_edges[k];
     auto edges = boost::edges(graph);
     for (auto it = edges.first; it != edges.second; ++it)
     {
@@ -90,8 +89,8 @@ bool beginEdge(int v, int k)
         {
             if (r_index[t] == 0)
             {
-                iS.pop();
-                iS.push(k + 1);
+                iS.pop_front();
+                iS.push_front(k + 1);
                 beginVisiting(t);
                 return true;
             }
@@ -101,7 +100,6 @@ bool beginEdge(int v, int k)
             }
         }
     }
-    return false;
 }
 
 void finishEdge(int v, int k)
@@ -127,8 +125,8 @@ void finishEdge(int v, int k)
 
 void visitLoop()
 {
-    int v = vS.top();
-    int i = iS.top();
+    int v = vS.front();
+    int i = iS.front();
     auto edges = boost::edges(graph);
     size_t e = boost::num_edges(graph);
     while (i <= e)
@@ -142,16 +140,17 @@ void visitLoop()
             return;
         }
         i++;
+        std::cout<<"visitI \n" << i;
     }
-    finishVisiting(v)
+    finishVisiting(v);
 }
 
 void visitI(int v)
 {
     beginVisiting(v);
+
     while (!vS.empty())
     {
-        std::cout<<"visitI \n";
         visitLoop();
     }
     return;
@@ -217,11 +216,11 @@ int main()
     boost::add_edge(vertices.at(9), vertices.at(7), graph);*/
    
     //random generation;
-    // boost::mt19937 rng;
-    // boost::generate_random_graph(graph, nn, 8, rng);
-    // size_t e = boost::num_edges(graph);
-    // size_t n = boost::num_vertices(graph);
-    // std::cout << "generated " << e << " edges, " << n << " vertices\n";
+    boost::mt19937 rng;
+    boost::generate_random_graph(graph, nn, 8, rng);
+    size_t e = boost::num_edges(graph);
+    size_t n = boost::num_vertices(graph);
+    std::cout << "generated " << e << " edges, " << n << " vertices\n";
 
     // graph[boost::graph_bundle].number_of_components =
     //     boost::connected_components(graph,
