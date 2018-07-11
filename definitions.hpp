@@ -39,7 +39,19 @@ typedef typename boost::graph_traits<graph_t>::vertex_descriptor vertex_t;
 typedef typename boost::graph_traits<graph_t>::edge_descriptor edge_t;
 
 
-//==============================================================================
+
+vector<bool> visited;
+vector<int> r_index;
+vector<bool> inComponent;
+stack<int> S;
+int vindex;
+int c; // component number.
+
+graph_t *g;
+
+
+
+//====utils==================================================================
 void print_graph(const graph_t &graph)
 {
   cout << "Graph ->" << "vertices: "<< boost::num_vertices(graph) << ", edges: " << boost::num_edges(graph) << endl;
@@ -60,17 +72,16 @@ void readSCC(graph_t graph_in)
   int num = strong_components(graph_in, make_iterator_property_map(cc.begin(), get(boost::vertex_index, graph_in), cc[0]));
 
   cout << "Boost:: Total number of components: " << num << endl;
-  vector<int>::iterator i;
 
   for (int comps=0; comps<num; comps++)
   {
-    int counter = 0;
-    for (i = cc.begin(); i != cc.end(); ++i)
+
+    cout << "Compenent " << comps  << ": ";
+    for (int i = 0; i < cc.size(); i++)
     {
-      if (comps == *i)
-        counter++;
+      if (comps == cc[i])
+         cout<<i<<' ';
     }
-    cout << "Compenent " << comps  << ": " <<counter;
     cout<<endl;
   }   
   cout<<endl;

@@ -1,24 +1,20 @@
 #ifndef PEARCE_REC_1
 #define PEARCE_REC_1
 
-vector<bool> visited(1, false);
-vector<int> r_index(1, 0);
-vector<bool> inComponent(1, false);
-stack<int> S;
-int vindex = 0;
-int c = 0; // component number.
 void pearce_recursive_1(int v);
-graph_t *g;
 
 void pr1(graph_t graph_local)
 {
   g = &graph_local;
   size_t nn = boost::num_vertices(graph_local);  
 
+  visited.resize(0);
   visited.resize(nn, false); 
   r_index.resize(nn, 0);
   inComponent.resize(nn, false);
-
+  vindex = 0;
+  c = 0; 
+  S = stack<int>();
   for (int i = 0; i < nn; i++)
   {
     if (!visited[i])
@@ -31,13 +27,12 @@ void pr1(graph_t graph_local)
   //   cout << ++iter << " : "  << *i <<" | ";
   for (int comps=0; comps<c; comps++)
   {
-    int counter = 0;
-    for (auto i = r_index.begin(); i != r_index.end(); ++i)
+    cout << "Component " << comps  << ": ";
+    for (int i = 0; i < r_index.size(); i++)
     {
-      if (comps == *i)
-        counter++;
+      if (comps == r_index[i])
+        cout<<i<<' ';
     }
-    cout << "Compenent " << comps  << ": " <<counter;
     cout<<endl;
   }   
   cout<<endl;

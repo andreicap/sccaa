@@ -1,13 +1,14 @@
 #include "definitions.hpp"
 #include "pearce_recursive_1.hpp"
-
+#include "tarjan.hpp"
+#include "nuutila.hpp"
 
 int main(int argc, char const *argv[])
 {
   graph_t g;
   vector<vertex_t> vertices;
 
-  int v_number = 15;
+  int v_number = 5;
   int e_number = v_number*2;
   boost::mt19937 rng;
   rng.seed(uint32_t(time(0)));
@@ -19,10 +20,15 @@ int main(int argc, char const *argv[])
   print_graph(g);
   //boost implementation
   readSCC(g);
+
+  nuutila_recursive(g);
   
   //pearce recursive first implementation
-  pr1 (g);
+ 
 
+  //tarjan
+  tarjan_recursive(g);
+  pr1 (g);
   return 0;
   
 }

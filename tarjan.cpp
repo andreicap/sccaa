@@ -127,6 +127,9 @@ void visitTarjan(int v)
         std::cout << v << "\n";
     }
 }
+
+
+
 void visitNutilla(int v)
 {
     visited[v] = true;

@@ -1,2 +1,2 @@
-boost: boost.cpp
-	g++ boost.cpp -o boost -std=c++11
+boost: main.cpp
+	g++ main.cpp -o main -std=c++11
