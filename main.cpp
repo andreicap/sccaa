@@ -24,11 +24,11 @@ int main(int argc, char const *argv[])
   nuutila_recursive(g);
   
   //pearce recursive first implementation
- 
+  pr1 (g);
 
   //tarjan
   tarjan_recursive(g);
-  pr1 (g);
+
   return 0;
   
 }
