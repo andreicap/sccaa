@@ -8,6 +8,28 @@
 #include <vector>
 
 //==============================================================================
+//
+struct node_properties
+{
+  int component;
+};
+struct edge_properties
+{
+};
+struct graph_properties
+{
+  int number_of_components;
+};
+
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::directedS,
+                              node_properties, 
+                              edge_properties, 
+                              graph_properties> 
+                                graph_t;
+typedef typename boost::graph_traits<graph_t>::vertex_descriptor vertex_t;
+typedef typename boost::graph_traits<graph_t>::edge_descriptor edge_t;
+
+
 
 graph_t graph;
 std::vector<vertex_t> vertices;
@@ -20,41 +42,14 @@ std::stack<int> vS;
 std::stack<int> iS;
 int vindex = 1;
 int c = nn - 1; // component number
-void visitI(int)
-{
-    beginVisit(v);
-    while (!vS.empty() && !iS.empty())
-    {
-        visitLoop();
-    }
-}
-void visitLoop()
-{
-    int v = vS.top();
-    int i = iS.top();
-    auto edges = boost::edges(graph);
-    size_t e = boost::num_edges(graph);
-    while (i < e)
-    {
-        if (i > 0)
-        {
-            finishEdge(v, i);
-        }
-        if (i > 0 && beginEdge(v, i))
-            ;
-        {
-            return;
-        }
-        i = i + 1;
-    }
-}
+
 void beginVisiting(int v)
 { // total: n(1 + 2w)
     vS.push(v);
     iS.push(0);
     root[v] = true;
-    r_index[v] = index;
-    index = index + 1;
+    r_index[v] = vindex;
+    vindex = vindex + 1;
 }
 
 void finishVisiting(int v)
@@ -65,14 +60,15 @@ void finishVisiting(int v)
     // Update component information
     if (root[v])
     {
-        index = index - 1;
-        while (!vS.empty() && (rindex[v] <= rindex[vS.top()]))
+        vindex = vindex - 1;
+        while (!vS.empty() && (r_index[v] <= r_index[vS.top()]))
         {
-            int w = vS.pop();
-            rindex[w] = c;
-            index = index - 1;
+            int w = vS.top();
+            vS.pop();
+            r_index[w] = c;
+            vindex = vindex - 1;
         }
-        rindex[v] = c;
+        r_index[v] = c;
         c = c - 1;
     }
     else
@@ -92,7 +88,7 @@ bool beginEdge(int v, int k)
         int s = boost::source(*it, graph);
         if (v == s)
         {
-            if (rindex[t] == 0)
+            if (r_index[t] == 0)
             {
                 iS.pop();
                 iS.push(k + 1);
@@ -105,6 +101,7 @@ bool beginEdge(int v, int k)
             }
         }
     }
+    return false;
 }
 
 void finishEdge(int v, int k)
@@ -118,14 +115,52 @@ void finishEdge(int v, int k)
         int s = boost::source(*it, graph);
         if (v == s)
         {
-            if (rindex[t] < rindex[v])
+            if (r_index[t] < r_index[v])
             {
-                rindex[v] = rindex[t];
+                r_index[v] = r_index[t];
                 root[v] = false;
             }
         }
     }
+    return;
 }
+
+void visitLoop()
+{
+    int v = vS.top();
+    int i = iS.top();
+    auto edges = boost::edges(graph);
+    size_t e = boost::num_edges(graph);
+    while (i <= e)
+    {
+        if (i > 0)
+        {
+            finishEdge(v, i-1);
+        }
+        if (i < e && beginEdge(v, i))
+        {
+            return;
+        }
+        i++;
+    }
+    finishVisiting(v)
+}
+
+void visitI(int v)
+{
+    beginVisiting(v);
+    while (!vS.empty())
+    {
+        std::cout<<"visitI \n";
+        visitLoop();
+    }
+    return;
+}
+
+
+
+
+
 
 //==============================================================================
 int main()
@@ -180,15 +215,17 @@ int main()
     boost::add_edge(vertices.at(7), vertices.at(8), graph);
     boost::add_edge(vertices.at(8), vertices.at(9), graph);
     boost::add_edge(vertices.at(9), vertices.at(7), graph);*/
-    boost::mt19937 rng;
-    boost::generate_random_graph(graph, nn, 8, rng);
-    size_t e = boost::num_edges(graph);
-    size_t n = boost::num_vertices(graph);
-    std::cout << "generated " << e << " edges, " << n << " vertices\n";
+   
+    //random generation;
+    // boost::mt19937 rng;
+    // boost::generate_random_graph(graph, nn, 8, rng);
+    // size_t e = boost::num_edges(graph);
+    // size_t n = boost::num_vertices(graph);
+    // std::cout << "generated " << e << " edges, " << n << " vertices\n";
 
-    graph[boost::graph_bundle].number_of_components =
-        boost::connected_components(graph,
-                                    boost::get(&node_properties::component, graph));
+    // graph[boost::graph_bundle].number_of_components =
+    //     boost::connected_components(graph,
+    //                                 boost::get(&node_properties::component, graph));
 
     //std::cout << "Without adaption:\n-----------------" << std::endl;
     //print_graph(graph);
