@@ -23,8 +23,6 @@ void pr1(graph_t graph_local)
     }
   }
   cout << "\nPearce recursive::components: " << c << endl;
-  // for (auto i = r_index.begin(); i != r_index.end(); ++i)
-  //   cout << ++iter << " : "  << *i <<" | ";
   for (int comps=0; comps<c; comps++)
   {
     cout << "Component " << comps  << ": ";
@@ -55,14 +53,12 @@ void pearce_recursive_1(int v)
 
     if (v == s)
     {
-      //cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
       if (!visited[w])
       {
         pearce_recursive_1(w);
       }
 
       for (auto i = r_index.begin(); i != r_index.end(); ++i)
-        //bool check = !(inComponent[w]) && (r_index[w] < r_index[v]);
         if (!(inComponent[w]) && (r_index[w] < r_index[v]))
         {
           r_index[v] = r_index[w];
