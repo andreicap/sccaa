@@ -1,7 +1,11 @@
 #ifndef NUUTILA
 #define NUUTILA
 
-
+/* ----------------------------------------------------------------------------------------  
+Improved algorithm by Nuutilla. 
+Based on Nuutila, Esko. "On Finding the Strongly Connected Components in a Directed Graph".
+Goal is to find local roots of the components 
+ ----------------------------------------------------------------------------------------  */
 
 void nuutila(int v);
 
@@ -20,7 +24,7 @@ void nuutila_recursive(graph_t graph_local)
   S = stack<int>();
   vindex = 0;
   c = 0;
-  cout<< "\n Nuutila recursive: " << endl;
+
   for (int i = 0; i < nn; i++)
   {
     if (!visited[i])
@@ -29,15 +33,13 @@ void nuutila_recursive(graph_t graph_local)
     }
   }
 
-  cout <<"\n nutilla root \n";
-  for (auto i = root.begin(); i != root.end(); ++i)
-    std::cout << *i << ' ';
 
+/* *************************************************  */
   vector<int> scc;
   scc =root; 
   sort(scc.begin(), scc.end());
   scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
-  cout << "\n Nutilla recursive::components: " << scc.size() << endl;
+  cout << "\n Nutilla ::components: " << scc.size() << endl;
   for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
     std::cout << '\n';
     cout << "Component: ";
@@ -48,6 +50,12 @@ void nuutila_recursive(graph_t graph_local)
       }
     }
   }
+
+    //cout <<"\n nutilla root \n";
+  //for (auto i = root.begin(); i != root.end(); ++i)
+  //   std::cout << *i << ' ';
+
+/* *************************************************  */
   cout<<endl;
 
 }
@@ -78,17 +86,19 @@ void nuutila(int v)
   if (root[v] == v)
   {
     inComponent[v] = true;
-    cout << "Component "<< c <<":";
+    // remove from the stack  until the top is greater then root node
     while (!S.empty() && (S.top() > v))
     {
+    // trivial component non root 
       int w = S.top();
       S.pop();
       inComponent[w] = true;
-      cout << " "<< w;
+     // cout << " "<< w;
     }
-    cout << " " << v << "\n";
+    //cout << " " << v << "\n";
     c++;
   }
+  // push only non root nodes after processing all edges 
   else
   {
     S.push(v);
