@@ -32,58 +32,58 @@ void pr2(graph_t graph_local)
     for (int i = 0; i < nn; i++)
     { 
       if (nn-1-comps == r_index[i])
-    {
+      {
         cout<<i<<" ";}
-    }
+      }
+      cout<<endl;
+    }   
     cout<<endl;
-  }   
-  cout<<endl;
 
-}
+  }
 
-void pearce_recursive_2(int v)
-{
+  void pearce_recursive_2(int v)
+  {
     bool root = true;
     r_index[v] = vindex;
     vindex = vindex + 1;
     auto edges = boost::edges(*g);
     for (auto it = edges.first; it != edges.second; ++it)
     {
-        int w = boost::target(*it, *g);
-        int s = boost::source(*it, *g);
-        if (v == s)
-        {
+      int w = boost::target(*it, *g);
+      int s = boost::source(*it, *g);
+      if (v == s)
+      {
             // std::cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
-            if (r_index[w] == 0)
-            {
-                pearce_recursive_2(w);
-            }
-            if (r_index[w] < r_index[v])
-
-            {
-                r_index[v] = r_index[w];
-                root = false;
-            }
+        if (r_index[w] == 0)
+        {
+          pearce_recursive_2(w);
         }
+        if (r_index[w] < r_index[v])
+
+        {
+          r_index[v] = r_index[w];
+          root = false;
+        }
+      }
     }
     if (root)
     {
+      vindex = vindex - 1;
+      while (!S.empty() && (r_index[v] <= r_index[S.top()]))
+      {
+        int w = S.top();
+        S.pop();
+        r_index[w] = c;
         vindex = vindex - 1;
-        while (!S.empty() && (r_index[v] <= r_index[S.top()]))
-        {
-            int w = S.top();
-            S.pop();
-            r_index[w] = c;
-            vindex = vindex - 1;
-        }
-        r_index[v] = c;
-        c = c - 1;
+      }
+      r_index[v] = c;
+      c = c - 1;
     }
     else
     {
-        S.push(v);
+      S.push(v);
     }
-}
+  }
 
 
 #endif

@@ -64,30 +64,30 @@ void pearce_recursive_1(int v)
           r_index[v] = r_index[w];
           root = false;
         }
-    }
-  }
-
-  if (root)
-  {
-    inComponent[v] = true;
-    while (!S.empty())
-    {
-      while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
-      {
-        int w = S.top();
-        S.pop();
-        r_index[w] = c;
-        inComponent[w] = true;
       }
     }
-    r_index[v] = c;
-    c = c + 1;
+
+    if (root)
+    {
+      inComponent[v] = true;
+      while (!S.empty())
+      {
+        while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
+        {
+          int w = S.top();
+          S.pop();
+          r_index[w] = c;
+          inComponent[w] = true;
+        }
+      }
+      r_index[v] = c;
+      c = c + 1;
+    }
+    else
+    {
+      S.push(v);
+    }
   }
-  else
-  {
-    S.push(v);
-  }
-}
 
 
 

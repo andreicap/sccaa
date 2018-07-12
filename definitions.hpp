@@ -10,9 +10,12 @@
 #include <iostream>
 #include <vector>
 
+
 //erdos dependencies
 #include <boost/graph/erdos_renyi_generator.hpp>
 #include <boost/random/linear_congruential.hpp> 
+
+
 
 using namespace std;
 
@@ -27,19 +30,22 @@ struct edge_properties
 struct graph_properties
 {
   int number_of_components;
+  typedef boost::disallow_parallel_edge_tag edge_parallel_category;
 };
 
 //--------------------------------------
 typedef boost::adjacency_list<
-  boost::vecS, 
-  boost::vecS, 
-  boost::directedS,
-  node_properties, 
-  edge_properties, 
-  graph_properties> graph_t;
-  
+boost::vecS, 
+boost::vecS, 
+boost::directedS,
+node_properties, 
+edge_properties, 
+graph_properties> graph_t;
+
 typedef typename boost::graph_traits<graph_t>::vertex_descriptor vertex_t;
 typedef typename boost::graph_traits<graph_t>::edge_descriptor edge_t;
+typedef typename boost::graph_traits<graph_t>::edge_parallel_category disallow_parallel_edge_tag;
+
 
 //erdos generator type
 typedef boost::erdos_renyi_iterator<boost::minstd_rand, graph_t> ERGen;
@@ -67,7 +73,7 @@ void print_graph(const graph_t &graph)
   for (auto it = edges.first; it != edges.second; ++it)
   {
     cout << boost::source(*it, graph) << " -> "
-              << boost::target(*it, graph) << endl;
+    << boost::target(*it, graph) << endl;
   }
 }
 
@@ -88,11 +94,11 @@ void readSCC(graph_t graph_in)
     for (int i = 0; i < cc.size(); i++)
     {
       if (comps == cc[i])
-         cout<<i<<' ';
-    }
-    cout<<endl;
-  }   
-  cout<<endl;
+       cout<<i<<' ';
+   }
+   cout<<endl;
+ }   
+ cout<<endl;
 }
 
 #endif
