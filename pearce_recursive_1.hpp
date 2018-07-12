@@ -10,7 +10,9 @@ void pr1(graph_t graph_local)
 
   visited.resize(0);
   visited.resize(nn, false); 
+  r_index.resize(0);
   r_index.resize(nn, 0);
+  inComponent.resize(0);
   inComponent.resize(nn, false);
   vindex = 0;
   c = 0; 
@@ -46,6 +48,8 @@ void pearce_recursive_1(int v)
   vindex = vindex + 1;
   inComponent[v] = false;
   auto edges = boost::edges(*g);
+
+  
   for (auto it = edges.first; it != edges.second; ++it)
   {
     int w = boost::target(*it, *g);
@@ -64,30 +68,30 @@ void pearce_recursive_1(int v)
           r_index[v] = r_index[w];
           root = false;
         }
-    }
-  }
-
-  if (root)
-  {
-    inComponent[v] = true;
-    while (!S.empty())
-    {
-      while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
-      {
-        int w = S.top();
-        S.pop();
-        r_index[w] = c;
-        inComponent[w] = true;
       }
     }
-    r_index[v] = c;
-    c = c + 1;
+
+    if (root)
+    {
+      inComponent[v] = true;
+      while (!S.empty())
+      {
+        while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
+        {
+          int w = S.top();
+          S.pop();
+          r_index[w] = c;
+          inComponent[w] = true;
+        }
+      }
+      r_index[v] = c;
+      c = c + 1;
+    }
+    else
+    {
+      S.push(v);
+    }
   }
-  else
-  {
-    S.push(v);
-  }
-}
 
 
 
