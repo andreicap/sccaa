@@ -22,14 +22,17 @@ int main(int argc, char const *argv[])
   //boost implementation
   readSCC(g);
 
-  nuutila_recursive(g);
+  // nuutila_recursive(g);
   
   //pearce recursive first implementation
-  pr1 (g);
+  pr2 (g);
 
- pr2 (g);
+  // pr1 (g);
+
+
+ 
   //tarjan
-  tarjan_recursive(g);
+  // tarjan_recursive(g);
 
   return 0;
   
