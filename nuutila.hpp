@@ -22,8 +22,8 @@ void nuutila_recursive(graph_t graph_local)
   c = 0;
 
 
-
-  cout << "\nNuutila recursive::components: " <<  endl;
+  int component_iterator = 0;
+  //cout << "\nNuutila recursive::components: " <<  endl;
   for (int i = 0; i < nn; i++)
   {
     if (!visited[i])
@@ -31,6 +31,25 @@ void nuutila_recursive(graph_t graph_local)
       nuutila(i);
     }
   }
+  cout <<"\n nutilla root \n";
+  for (auto i = root.begin(); i != root.end(); ++i)
+    std::cout << *i << ' ';
+
+     vector<int> scc;
+ scc =root; 
+std::sort(scc.begin(), scc.end());
+scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
+cout << "\n Nutilla recursive::components: " << scc.size() << endl;
+    for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
+      std::cout << '\n';
+      cout << "Component: ";
+      for (int i = 0; i < nn; i++)
+    {  
+      if (*ip == root[i]){
+        cout << i << ' ';
+      }
+    }
+    }
   cout<<endl;
 }
 
@@ -62,7 +81,7 @@ void nuutila(int v)
     if (root[v] == v)
     {
         inComponent[v] = true;
-        cout << "Component "<< component_iterator<<":";
+       // cout << "Component "<< component_iterator<<":";
         while (!S.empty() && (S.top() >= v))
         {
 
@@ -71,7 +90,7 @@ void nuutila(int v)
             cout << " "<< w;
             inComponent[w] = true;
         }
-        cout << " " << v << "\n";
+       // cout << " " << v << "\n";
         component_iterator ++;
     }
     else
