@@ -38,11 +38,14 @@ int main(int argc, char const *argv[])
   //nuutila implementaion
   nuutila_recursive(g);
   
-  //pearce recursive first implementation
-  pr1 (g);
 
   //pearce improved
   pr2 (g);
+  
+  //pearce recursive first implementation
+  pr1 (g);
+
+  
 
   //tarjan implementation
   tarjan_recursive(g);

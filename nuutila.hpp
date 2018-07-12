@@ -23,7 +23,7 @@ void nuutila_recursive(graph_t graph_local)
   c = 0;
 
   //loopt through components
-  cout << "\nNuutila recursive::components: " <<  endl;
+  cout << "\nNuutila recursive: " << endl;
   for (int i = 0; i < nn; i++)
   {
     if (!visited[i])
@@ -31,7 +31,7 @@ void nuutila_recursive(graph_t graph_local)
       nuutila(i);
     }
   }
-  cout<<endl;
+  cout << "Nr. of components: " << c << endl;
 }
 
 int component_iterator = 0;
@@ -62,17 +62,18 @@ void nuutila(int v)
     if (root[v] == v)
     {
         inComponent[v] = true;
-        cout << "Component "<< component_iterator<<":";
+        cout << "Component "<< c <<":";
         while (!S.empty() && (S.top() >= v))
         {
 
             int w = S.top();
             S.pop();
-            cout << " "<< w;
             inComponent[w] = true;
+            cout << " "<< w;
+
         }
         cout << " " << v << "\n";
-        component_iterator ++;
+        c++;
     }
     else
     {

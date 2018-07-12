@@ -45,9 +45,8 @@ void tarjan_recursive(graph_t graph_local)
       tarjan(i);
     }
   }
-  cout<<endl;
+  cout << "Nr. of components: " << c << endl;
 }
-int iter = 0;
 
 void tarjan(int v)
 {
@@ -75,7 +74,7 @@ void tarjan(int v)
   }
   if (root[v] == v)
   {
-    cout << "Component "<< iter<<":";
+    cout << "Component "<< c<<":";
     while (!S.empty() && (S.top() > v))
     {
       int w = S.top();
@@ -84,7 +83,7 @@ void tarjan(int v)
       cout << " " << w;
     }
     cout << " " << v << "\n";
-    iter++;
+    c++;
   }
 }
 
