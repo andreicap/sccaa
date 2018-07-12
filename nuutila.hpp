@@ -68,10 +68,11 @@ void nuutila(int v)
 
             int w = S.top();
             S.pop();
-            cout << " "<< w <<;
+            cout << " "<< w;
             inComponent[w] = true;
         }
         cout << " " << v << "\n";
+        component_iterator ++;
     }
     else
     {
