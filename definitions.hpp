@@ -1,4 +1,3 @@
-
 #ifndef _DEFINITIONS
 #define _DEFINITIONS
 
@@ -10,6 +9,10 @@
 #include <stack>
 #include <iostream>
 #include <vector>
+
+//erdos dependencies
+#include <boost/graph/erdos_renyi_generator.hpp>
+#include <boost/random/linear_congruential.hpp> 
 
 using namespace std;
 
@@ -38,8 +41,11 @@ typedef boost::adjacency_list<
 typedef typename boost::graph_traits<graph_t>::vertex_descriptor vertex_t;
 typedef typename boost::graph_traits<graph_t>::edge_descriptor edge_t;
 
+//erdos generator type
+typedef boost::erdos_renyi_iterator<boost::minstd_rand, graph_t> ERGen;
 
 
+//vars used in all agorithms
 vector<bool> visited;
 vector<int> r_index;
 vector<bool> inComponent;
@@ -52,6 +58,8 @@ graph_t *g;
 
 
 //====utils==================================================================
+
+//print graph
 void print_graph(const graph_t &graph)
 {
   cout << "Graph ->" << "vertices: "<< boost::num_vertices(graph) << ", edges: " << boost::num_edges(graph) << endl;
