@@ -52,6 +52,8 @@ graph_t *g;
 
 
 //====utils==================================================================
+
+//print graph
 void print_graph(const graph_t &graph)
 {
   cout << "Graph ->" << "vertices: "<< boost::num_vertices(graph) << ", edges: " << boost::num_edges(graph) << endl;

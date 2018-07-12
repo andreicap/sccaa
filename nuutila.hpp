@@ -10,6 +10,7 @@ void nuutila_recursive(graph_t graph_local)
 {
   g = &graph_local;
 
+  //initializers
   size_t nn = boost::num_vertices(graph_local);  
   visited.resize(0); 
   visited.resize(nn, false); 
@@ -21,8 +22,7 @@ void nuutila_recursive(graph_t graph_local)
   vindex = 0;
   c = 0;
 
-
-
+  //loopt through components
   cout << "\nNuutila recursive::components: " <<  endl;
   for (int i = 0; i < nn; i++)
   {
