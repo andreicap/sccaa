@@ -1,5 +1,6 @@
 #include "definitions.hpp"
 #include "pearce_recursive_1.hpp"
+#include "pearce_recursive_2.hpp"
 #include "tarjan.hpp"
 #include "nuutila.hpp"
 
@@ -26,6 +27,7 @@ int main(int argc, char const *argv[])
   //pearce recursive first implementation
   pr1 (g);
 
+ pr2 (g);
   //tarjan
   tarjan_recursive(g);
 
