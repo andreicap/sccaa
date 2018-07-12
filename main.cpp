@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
   graph_t g;
   vector<vertex_t> vertices;
 
-  int v_number = 10;
+  int v_number = strtol(argv[1], NULL, 10);
   int e_number = v_number*2;
   boost::mt19937 rng;
   rng.seed(uint32_t(time(0)));
