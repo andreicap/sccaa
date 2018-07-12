@@ -43,21 +43,25 @@ void tarjan_recursive(graph_t graph_local)
   }
 
 
- vector<int> scc;
- scc =root; 
-std::sort(scc.begin(), scc.end());
-scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
-cout << "\nTarjan recursive::components: " <<scc.size() << endl;
-    for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
-      std::cout << '\n';
-      cout << "Component: ";
-      for (int i = 0; i < nn; i++)
+  vector<int> scc;
+  
+  scc =root; 
+  
+  sort(scc.begin(), scc.end());
+  
+  scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
+
+  cout << "\nTarjan recursive::components: " <<scc.size() << endl;
+  for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
+    std::cout << '\n';
+    cout << "Component: ";
+    for (int i = 0; i < nn; i++)
     {  
       if (*ip == root[i]){
         cout << i << ' ';
       }
     }
-    }
+  }
   cout <<"\n tarjan root \n";
   for (auto i = root.begin(); i != root.end(); ++i)
     std::cout << *i << ' ';
@@ -70,7 +74,7 @@ int iter = 0;
 
 void tarjan(int v)
 {
-  
+
   visited[v] = true;
   root[v] = v;
   inComponent[v] = false;
@@ -94,17 +98,12 @@ void tarjan(int v)
   }
   if (root[v] == v)
   {
-    while (!S.empty() && (S.top() > v))
+    while (!S.empty() && (S.top() >= v))
     {
       int w = S.top();
       S.pop();
       inComponent[w] = true; 
     }
-
-    //std::cout <<"\n";
-    //cout << " *" << v << "\n";
-    //S.pop();
-    //cout << "POP" << w;
     iter++;
 
   }

@@ -20,7 +20,7 @@ void nuutila_recursive(graph_t graph_local)
   S = stack<int>();
   vindex = 0;
   c = 0;
-cout<< "\n Nuutila recursive: " << endl;
+  cout<< "\n Nuutila recursive: " << endl;
   for (int i = 0; i < nn; i++)
   {
     if (!visited[i])
@@ -33,68 +33,66 @@ cout<< "\n Nuutila recursive: " << endl;
   for (auto i = root.begin(); i != root.end(); ++i)
     std::cout << *i << ' ';
 
-     vector<int> scc;
- scc =root; 
-std::sort(scc.begin(), scc.end());
-scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
-cout << "\n Nutilla recursive::components: " << scc.size() << endl;
-    for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
-      std::cout << '\n';
-      cout << "Component: ";
-      for (int i = 0; i < nn; i++)
+  vector<int> scc;
+  scc =root; 
+  sort(scc.begin(), scc.end());
+  scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
+  cout << "\n Nutilla recursive::components: " << scc.size() << endl;
+  for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
+    std::cout << '\n';
+    cout << "Component: ";
+    for (int i = 0; i < nn; i++)
     {  
       if (*ip == root[i]){
         cout << i << ' ';
       }
     }
-    }
+  }
   cout<<endl;
 
 }
 
 void nuutila(int v)
 {
-    visited[v] = true;
-    root[v] = v;
-    inComponent[v] = false;
-    auto edges = boost::edges(*g);
-    for (auto it = edges.first; it != edges.second; ++it)
-    {
+  visited[v] = true;
+  root[v] = v;
+  inComponent[v] = false;
+  auto edges = boost::edges(*g);
+  for (auto it = edges.first; it != edges.second; ++it)
+  {
 
-        int w = boost::target(*it, *g);
-        int s = boost::source(*it, *g);
-        if (v == s)
-        {
-            if (!visited[w])
-            {
-                nuutila(w);
-            }
-            if (!inComponent[w])
-            {
-                root[v] = min(root[v], root[w]);
-            }
-        }
-    }
-    if (root[v] == v)
+    int w = boost::target(*it, *g);
+    int s = boost::source(*it, *g);
+    if (v == s)
     {
-        inComponent[v] = true;
-        cout << "Component "<< c <<":";
-        while (!S.empty() && (S.top() > v))
-        {
-
-            int w = S.top();
-            S.pop();
-            inComponent[w] = true;
-            cout << " "<< w;
-
-        }
-        cout << " " << v << "\n";
-        c++;
+      if (!visited[w])
+      {
+        nuutila(w);
+      }
+      if (!inComponent[w])
+      {
+        root[v] = min(root[v], root[w]);
+      }
     }
-    else
+  }
+  if (root[v] == v)
+  {
+    inComponent[v] = true;
+    cout << "Component "<< c <<":";
+    while (!S.empty() && (S.top() > v))
     {
-        S.push(v);
+      int w = S.top();
+      S.pop();
+      inComponent[w] = true;
+      cout << " "<< w;
     }
+    cout << " " << v << "\n";
+    c++;
+  }
+  else
+  {
+    S.push(v);
+  }
 }
 
 

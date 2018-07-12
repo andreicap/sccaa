@@ -26,25 +26,19 @@ int main(int argc, char const *argv[])
   graph_t gr(ERGen(gen, v_number, epsilon), ERGen(), v_number);
   g = gr;
 
-
-
-
-
   print_graph(g);
-  
   //boost implementation
   readSCC(g);
-
-  //nuutila implementaion
-  nuutila_recursive(g);
-  
 
   //pearce improved
   pr2 (g);
 
   //pearce recursive first implementation
   pr1 (g);
-
+  
+ 
+  //nuutila implementaion
+  nuutila_recursive(g);
   
 
   //tarjan implementation
