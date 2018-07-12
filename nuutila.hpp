@@ -60,7 +60,7 @@ void nuutila(int v)
     {
         inComponent[v] = true;
         cout << "Component "<< c <<":";
-        while (!S.empty() && (S.top() >= v))
+        while (!S.empty() && (S.top() > v))
         {
 
             int w = S.top();

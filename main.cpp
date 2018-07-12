@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
   
 
   //erdos generator
-  float epsilon = 0.14;
+  float epsilon = 0.17;
   boost::minstd_rand gen;
   gen.seed(uint32_t(time(0)));
   graph_t gr(ERGen(gen, v_number, epsilon), ERGen(), v_number);
@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
 
   //pearce improved
   pr2 (g);
-  
+
   //pearce recursive first implementation
   pr1 (g);
 
