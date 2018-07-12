@@ -1,7 +1,6 @@
 #ifndef TARJAN
 #define TARJAN
 
-#include "definitions.hpp"
 
 vector<int> root;
 void tarjan(int v);

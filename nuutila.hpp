@@ -1,7 +1,6 @@
 #ifndef NUUTILA
 #define NUUTILA
 
-#include "definitions.hpp"
 
 
 void nuutila(int v);
@@ -33,8 +32,6 @@ void nuutila_recursive(graph_t graph_local)
   }
   cout << "Nr. of components: " << c << endl;
 }
-
-int component_iterator = 0;
 
 void nuutila(int v)
 {
