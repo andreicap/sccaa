@@ -2,7 +2,7 @@
 #define NUUTILA
 
 /* ----------------------------------------------------------------------------------------  
-Improved algorithm by Nuutilla. 
+SCC detection algorithm by Nuutilla. 
 Based on Nuutila, Esko. "On Finding the Strongly Connected Components in a Directed Graph".
 Goal is to find local roots of the components 
  ----------------------------------------------------------------------------------------  */
