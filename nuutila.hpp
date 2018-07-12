@@ -1,7 +1,6 @@
 #ifndef NUUTILA
 #define NUUTILA
 
-#include "definitions.hpp"
 
 
 void nuutila(int v);
@@ -10,6 +9,7 @@ void nuutila_recursive(graph_t graph_local)
 {
   g = &graph_local;
 
+  //initializers
   size_t nn = boost::num_vertices(graph_local);  
   visited.resize(0); 
   visited.resize(nn, false); 
@@ -20,10 +20,7 @@ void nuutila_recursive(graph_t graph_local)
   S = stack<int>();
   vindex = 0;
   c = 0;
-
-
-  int component_iterator = 0;
-  //cout << "\nNuutila recursive::components: " <<  endl;
+cout<< "\n Nuutila recursive: " << endl;
   for (int i = 0; i < nn; i++)
   {
     if (!visited[i])
@@ -31,6 +28,7 @@ void nuutila_recursive(graph_t graph_local)
       nuutila(i);
     }
   }
+
   cout <<"\n nutilla root \n";
   for (auto i = root.begin(); i != root.end(); ++i)
     std::cout << *i << ' ';
@@ -51,9 +49,8 @@ cout << "\n Nutilla recursive::components: " << scc.size() << endl;
     }
     }
   cout<<endl;
-}
 
-int component_iterator = 0;
+}
 
 void nuutila(int v)
 {
@@ -81,17 +78,18 @@ void nuutila(int v)
     if (root[v] == v)
     {
         inComponent[v] = true;
-       // cout << "Component "<< component_iterator<<":";
-        while (!S.empty() && (S.top() >= v))
+        cout << "Component "<< c <<":";
+        while (!S.empty() && (S.top() > v))
         {
 
             int w = S.top();
             S.pop();
-            cout << " "<< w;
             inComponent[w] = true;
+            cout << " "<< w;
+
         }
-       // cout << " " << v << "\n";
-        component_iterator ++;
+        cout << " " << v << "\n";
+        c++;
     }
     else
     {

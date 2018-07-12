@@ -1,7 +1,6 @@
 #ifndef TARJAN
 #define TARJAN
 
-#include "definitions.hpp"
 
 vector<int> root;
 void tarjan(int v);
@@ -68,6 +67,7 @@ cout << "\nTarjan recursive::components: " <<scc.size() << endl;
 
 int iter = 0;
 
+
 void tarjan(int v)
 {
   
@@ -94,18 +94,19 @@ void tarjan(int v)
   }
   if (root[v] == v)
   {
-    //cout << "Component "<< iter<<":";
     while (!S.empty() && (S.top() > v))
     {
       int w = S.top();
       S.pop();
       inComponent[w] = true; 
     }
+
     //std::cout <<"\n";
     //cout << " *" << v << "\n";
     //S.pop();
     //cout << "POP" << w;
     iter++;
+
   }
 }
 
