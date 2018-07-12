@@ -31,10 +31,10 @@ int main(int argc, char const *argv[])
   readSCC(g);
 
   //pearce improved
-  // pr2 (g);
+  pr2 (g);
 
   //pearce recursive first implementation
-  // pr1 (g);
+  pr1 (g);
   
  
   //nuutila implementaion
@@ -42,7 +42,7 @@ int main(int argc, char const *argv[])
   
 
   //tarjan implementation
-  // tarjan_recursive(g);
+  tarjan_recursive(g);
 
   return 0;
   

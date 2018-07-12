@@ -4,9 +4,21 @@
 
 vector<int> root;
 void tarjan(int v);
+void tarjan2(int v);
+int iter;
+
+vector<bool> visit(10, false);
+vector<bool>  instk(10, false);
+vector<int>  low(10,0);
+int I=0;
+vector<int>  ind(10,0);
+stack<int> stk;
+
+
 
 void tarjan_recursive(graph_t graph_local)
 {
+  iter = 0;
   g = &graph_local;
 
   size_t nn = boost::num_vertices(graph_local);  
@@ -17,35 +29,20 @@ void tarjan_recursive(graph_t graph_local)
   inComponent.resize(0);
   inComponent.resize(nn, false);
   S = stack<int>();
+  c = 0;
+  vindex = 0;
 
 
-  // // for (auto i = r_index.begin(); i != r_index.end(); ++i)
-  // //   cout << ++iter << " : "  << *i <<" | ";
-  // for (int comps=0; comps<c; comps++)
-  // {
-  //   int counter = 0;
-  //   for (auto i = r_index.begin(); i != r_index.end(); ++i)
-  //   {
-  //     if (comps == *i)
-  //       counter++;
-  //   }
-  //   cout << "Compenent " << comps  << ": " <<counter;
-  //   cout<<endl;
-  // }   
-  // cout<<endl;
-  // 
   for (int i = 0; i < nn; i++)
   {
-    if (!visited[i])
-    {
-      tarjan(i);
-    }
+    if (visited[i]) continue;
+    tarjan(i);
   }
 
 
   vector<int> scc;
   
-  scc =root; 
+  scc = root; 
   
   sort(scc.begin(), scc.end());
   
@@ -62,19 +59,19 @@ void tarjan_recursive(graph_t graph_local)
       }
     }
   }
+
   cout <<"\n tarjan root \n";
   for (auto i = root.begin(); i != root.end(); ++i)
     std::cout << *i << ' ';
+  
 
   cout<<endl;
 }
 
-int iter = 0;
 
 
 void tarjan(int v)
 {
-
   visited[v] = true;
   root[v] = v;
   inComponent[v] = false;
@@ -84,8 +81,10 @@ void tarjan(int v)
   {
     int w = boost::target(*it, *g);
     int s = boost::source(*it, *g);
-    if (v == s)
+
+    if (v == s )
     {
+    // cout << v << "->" <<w << endl;
       if (!visited[w])
       {
         tarjan(w);
@@ -98,18 +97,64 @@ void tarjan(int v)
   }
   if (root[v] == v)
   {
-    while (!S.empty() && (S.top() >= v))
+    int w;
+    do 
     {
-      int w = S.top();
+      w = S.top();
       S.pop();
-      inComponent[w] = true; 
-    }
-    iter++;
-
+      inComponent[w] = true;
+    } while (w != v);
+    iter ++;
   }
 }
 
 
 
+
+
+// void tarjan2( int u )
+// {
+//   visit[u] = true;
+//   // instk[u] = true;
+//   ind[u] = I;
+//   low[u] = I++;
+//   stk.push(u);
+//   int min = low[u];
+
+//   auto edges = boost::edges(*g);
+//   for (auto it = edges.first; it != edges.second; ++it)
+//   {
+//     int w = boost::target(*it, *g);
+//     int s = boost::source(*it, *g);
+
+//     if (u == s)
+//     {
+//       cout << u << "->" << w << endl;
+//       if( !visit[w] ){
+//         tarjan2( w );
+//         if (low[w] < min) min = low[w];
+//       }
+//     }
+//   }
+
+//   if( min < low[u] ){
+//     low[u] = min;
+//     return;
+//   }
+
+//   int w;
+//   do
+//   {
+//     w = stk.top();
+//     stk.pop();
+//     instk[w] = false;
+//     ind[w] = c;
+//     low[w] = u;
+//     // cout<< w << " ";
+//   } while( w !=u );
+//   c++;
+//   cout<<"\n c= "<< c <<endl;
+//   // instk[u] = false;  
+// }
 
 #endif
