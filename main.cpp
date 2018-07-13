@@ -60,7 +60,7 @@ int main(int argc, char const *argv[])
   /* *************************************************  */
   size_t e = boost::num_edges(g);
   size_t n = boost::num_vertices(g);
-  std::cout << "generated " << e << " edges, " << n << " vertices\n";
+  cout << "generated " << e << " edges, " << n << " vertices\n";
 
   print_graph(g);
 
