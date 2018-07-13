@@ -38,7 +38,7 @@ boost::vecS,
 boost::vecS, 
 boost::directedS,
 node_properties, 
-edge_properties, 
+boost::disallow_parallel_edge_tag, 
 graph_properties> graph_t;
 
 typedef typename boost::graph_traits<graph_t>::vertex_descriptor vertex_t;
