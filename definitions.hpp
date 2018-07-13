@@ -26,11 +26,11 @@ struct node_properties
 };
 struct edge_properties
 {
+  boost::disallow_parallel_edge_tag edge_parallel_category;
 };
 struct graph_properties
 {
   int number_of_components;
-  typedef boost::disallow_parallel_edge_tag edge_parallel_category;
 };
 
 //--------------------------------------
@@ -44,7 +44,6 @@ graph_properties> graph_t;
 
 typedef typename boost::graph_traits<graph_t>::vertex_descriptor vertex_t;
 typedef typename boost::graph_traits<graph_t>::edge_descriptor edge_t;
-typedef typename boost::graph_traits<graph_t>::edge_parallel_category disallow_parallel_edge_tag;
 
 
 //erdos generator type

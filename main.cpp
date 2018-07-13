@@ -14,27 +14,29 @@ int main(int argc, char const *argv[])
   
   //boost random generator
   
-  boost::mt19937 rng;
-  rng.seed(uint32_t(time(0)));
-  boost::generate_random_graph(g, v_number, e_number, rng);
+  // boost::mt19937 rng;
+  // rng.seed(uint32_t(time(0)));
+  // boost::generate_random_graph(g, v_number, e_number, rng);
   
 
-  //erdos generator
-  // float epsilon = 0.17;
-  // boost::minstd_rand gen;
-  // gen.seed(uint32_t(time(0)));
-  // graph_t gr(ERGen(gen, v_number, epsilon), ERGen(), v_number);
-  // g = gr;
+  // erdos generator
+  float epsilon = 0.1;
+  boost::minstd_rand gen;
+  gen.seed(uint32_t(time(0)));
+  graph_t gr(ERGen(gen, v_number, epsilon), ERGen(), v_number);
+  g = gr;
 
   print_graph(g);
   //boost implementation
   readSCC(g);
 
+  //pearce recursive first implementation
+  pr1 (g);
+  
   //pearce improved
   pr2 (g);
 
-  //pearce recursive first implementation
-  pr1 (g);
+
   
  
   //nuutila implementaion

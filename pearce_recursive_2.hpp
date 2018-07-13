@@ -7,9 +7,13 @@ void pr2(graph_t graph_local)
 {
   g = &graph_local;
   size_t nn = boost::num_vertices(graph_local);  
-
+  
+  r_index.resize(0);
   r_index.resize(nn, 0);
+
+  inComponent.resize(0);
   inComponent.resize(nn, false);
+  
   vindex = 1;
   c = nn - 1; 
   S = stack<int>();
