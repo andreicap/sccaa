@@ -26,7 +26,6 @@ struct node_properties
 };
 struct edge_properties
 {
-  boost::disallow_parallel_edge_tag edge_parallel_category;
 };
 struct graph_properties
 {

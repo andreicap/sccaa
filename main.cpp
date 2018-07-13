@@ -73,14 +73,11 @@ int main(int argc, char const *argv[])
   pr2 (g);
 
 
-  
- 
   //nuutila implementaion
   nuutila_recursive(g);
-  
 
-  //pearce improved
-  //pr2 (g);
+  tarjan_recursive(g);
+  
 
   return 0;
 }
