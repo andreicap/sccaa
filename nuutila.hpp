@@ -15,12 +15,16 @@ void nuutila_recursive(graph_t graph_local)
 
   //initializers
   size_t nn = boost::num_vertices(graph_local);  
+  
   visited.resize(0); 
   visited.resize(nn, false); 
+  
   root.resize(0);
   root.resize(nn, 0);
+  
   inComponent.resize(0);
   inComponent.resize(nn, false);
+  
   S = stack<int>();
   vindex = 0;
   c = 0;
@@ -87,14 +91,16 @@ void nuutila(int v)
   {
     inComponent[v] = true;
     // remove from the stack  until the top is greater then root node
-    while (!S.empty() && (S.top() > v))
+    int w;
+    do
     {
     // trivial component non root 
-      int w = S.top();
+      if (S.empty()) break;
+      w = S.top();
       S.pop();
       inComponent[w] = true;
      // cout << " "<< w;
-    }
+    } while ( w > v );
     //cout << " " << v << "\n";
     c++;
   }

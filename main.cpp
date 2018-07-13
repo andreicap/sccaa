@@ -13,7 +13,6 @@ int main(int argc, char const *argv[])
   int e_number = v_number * 2;
 
   //boost random generator
-  
   boost::mt19937 rng;
   rng.seed(uint32_t(time(0)));
   boost::generate_random_graph(g, v_number, e_number, rng);
