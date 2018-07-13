@@ -67,6 +67,7 @@ graph_t *g;
 //print graph
 void print_graph(const graph_t &graph)
 {
+  cout<<'\n';
   cout << "Graph ->" << "vertices: "<< boost::num_vertices(graph) << ", edges: " << boost::num_edges(graph) << endl;
   auto edges = boost::edges(graph);
   for (auto it = edges.first; it != edges.second; ++it)
@@ -77,9 +78,11 @@ void print_graph(const graph_t &graph)
 }
 
 
-//show boost component detection
+// boost library SCC detection 
+// used to countercheck the results 
 void readSCC(graph_t graph_in)
 {
+  cout<<'\n';
   int nn = boost::num_vertices(graph_in);
   vector<int> cc(nn);
   int num = strong_components(graph_in, make_iterator_property_map(cc.begin(), get(boost::vertex_index, graph_in), cc[0]));
@@ -96,7 +99,8 @@ void readSCC(graph_t graph_in)
        cout<<i<<' ';
    }
    cout<<endl;
- }   
+ }
+ cout<<'\n';
  cout<<endl;
 }
 

@@ -1,24 +1,30 @@
 #ifndef TARJAN
 #define TARJAN
-
+/* ----------------------------------------------------------------------------------------  
+Tarjan DFS by Nuutilla. 
+Based on Nuutila, Esko. "On Finding the Strongly Connected Components in a Directed Graph".
+Goal is to find local roots of the components 
+ ----------------------------------------------------------------------------------------  */
 
 vector<int> root;
 void tarjan(int v);
 void tarjan2(int v);
-int iter;
+//int iter;
 
+
+/* original tarjan algorithm 
 vector<bool> visit(10, false);
-vector<bool>  instk(10, false);
+vector<bool>  instk(10, false); 
 vector<int>  low(10,0);
 int I=0;
 vector<int>  ind(10,0);
 stack<int> stk;
-
+*/
 
 
 void tarjan_recursive(graph_t graph_local)
 {
-  iter = 0;
+  //iter = 0;
   g = &graph_local;
 
   size_t nn = boost::num_vertices(graph_local);  
@@ -37,8 +43,9 @@ void tarjan_recursive(graph_t graph_local)
   {
     if (visited[i]) continue;
     tarjan(i);
-  }
+  } 
 
+/* *************************************************  */
 
   vector<int> scc;
   
@@ -60,11 +67,11 @@ void tarjan_recursive(graph_t graph_local)
     }
   }
 
-  cout <<"\n tarjan root \n";
+  /*cout <<"\n tarjan root \n";
   for (auto i = root.begin(); i != root.end(); ++i)
     std::cout << *i << ' ';
-  
-
+  */
+/* *************************************************  */
   cout<<endl;
 }
 
@@ -73,45 +80,56 @@ void tarjan_recursive(graph_t graph_local)
 void tarjan(int v)
 {
   visited[v] = true;
+  // vertex v is root candidate 
   root[v] = v;
+  // used to distingish between  nodes belonging to the same component
   inComponent[v] = false;
+  // push visited vertices to the stack S
   S.push(v);
+  // retrieves all edges from the graph 
   auto edges = boost::edges(*g);
+  // iterates over the edges 
   for (auto it = edges.first; it != edges.second; ++it)
   {
     int w = boost::target(*it, *g);
     int s = boost::source(*it, *g);
-
+    // if vertex v is equal to source node of the edge 
     if (v == s )
     {
-    // cout << v << "->" <<w << endl;
+      // visit in DF order if not visited already
       if (!visited[w])
       {
         tarjan(w);
       }
       if (!inComponent[w])
       {
+        // set root vertex v to the minimum between the own value and target vertex 
         root[v] = min(root[v], root[w]);
       }
     }
   }
+  // vertex v is the root
+  // the stack contains the scc 
   if (root[v] == v)
   {
     int w;
     do 
     {
+      // remove SCC from the stack 
       w = S.top();
       S.pop();
       inComponent[w] = true;
     } while (w != v);
-    iter ++;
+    //iter ++;
   }
 }
 
 
 
 
-
+/*
+original tarjan algorithm implementation 
+ */
 // void tarjan2( int u )
 // {
 //   visit[u] = true;

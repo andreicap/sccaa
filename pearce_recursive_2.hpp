@@ -1,6 +1,12 @@
 #ifndef PEARCE_REC_2
 #define PEARCE_REC_2
 
+/* ----------------------------------------------------------------------------------------  
+SCC detection by Pearce. 
+Based on Pearce, David. "A Space Efficient Algorithm for Detecting Strongly Connected Components".
+Goal is to find SCC given a graph  
+ ----------------------------------------------------------------------------------------  */
+
 void pearce_recursive_2(int v);
 
 void pr2(graph_t graph_local)
@@ -26,9 +32,8 @@ void pr2(graph_t graph_local)
     }
   }
 
-  // for (auto i = r_index.begin(); i != r_index.end(); ++i)
-  //       std::cout << *i << ' ';
-  
+/* *************************************************  */
+// Used to show the strong the SCC 
   cout << "\nPearce 2  recursive::components: " << nn-c-1 << endl;
   for (int comps=0; comps<nn-c-1; comps++)
   {
@@ -40,7 +45,8 @@ void pr2(graph_t graph_local)
         cout<<i<<" ";}
       }
       cout<<endl;
-    }   
+    }
+/* *************************************************  */
     cout<<endl;
 
   }
@@ -48,6 +54,7 @@ void pr2(graph_t graph_local)
   void pearce_recursive_2(int v)
   {
     bool root = true;
+    // keeps track of visited 
     r_index[v] = vindex;
     vindex = vindex + 1;
     auto edges = boost::edges(*g);

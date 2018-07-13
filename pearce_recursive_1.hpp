@@ -1,5 +1,10 @@
 #ifndef PEARCE_REC_1
 #define PEARCE_REC_1
+/* ----------------------------------------------------------------------------------------  
+SCC detection by Pearce. 
+Based on Pearce, David. "A Space Efficient Algorithm for Detecting Strongly Connected Components".
+Goal is to find SCC given a graph  
+ ----------------------------------------------------------------------------------------  */
 
 void pearce_recursive_1(int v);
 
@@ -40,8 +45,10 @@ void pr1(graph_t graph_local)
 
 void pearce_recursive_1(int v)
 {
+  // used to detect if vistation index changes after visit
   bool root = true;
   visited[v] = true;
+  // visitation index 
   r_index[v] = vindex;
   vindex = vindex + 1;
   inComponent[v] = false;
@@ -59,6 +66,8 @@ void pearce_recursive_1(int v)
       }
 
       for (auto i = r_index.begin(); i != r_index.end(); ++i)
+      // if rindex[v] has not been updated 
+      // or not  already been assigned to a component
         if (!(inComponent[w]) && (r_index[w] < r_index[v]))
         {
           r_index[v] = r_index[w];
@@ -70,8 +79,8 @@ void pearce_recursive_1(int v)
     if (root)
     {
       inComponent[v] = true;
-      while (!S.empty())
-      {
+     // while (!S.empty()) {
+        // all nodes are SCC with the local root until the visitation is grater
         while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
         {
           int w = S.top();
@@ -79,10 +88,11 @@ void pearce_recursive_1(int v)
           r_index[w] = c;
           inComponent[w] = true;
         }
-      }
+     // }
       r_index[v] = c;
       c = c + 1;
     }
+    // vertex v is not local root
     else
     {
       S.push(v);
