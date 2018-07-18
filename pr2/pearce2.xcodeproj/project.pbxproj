@@ -6,26 +6,54 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXCopyFilesBuildPhase section */
+		02EF311E20FF5F8E0081A837 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		02D9BC2320FF4CD60040303B /* nuutila.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = nuutila.cpp; sourceTree = "<group>"; };
-		02D9BC2420FF4CD60040303B /* nuutila.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = nuutila.hpp; sourceTree = "<group>"; };
-		02D9BC2520FF4CD60040303B /* nuutila */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = nuutila; sourceTree = "<group>"; };
 		02D9BC2620FF4CD60040303B /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
-		02D9BC2720FF4CD60040303B /* nuutila - 100 vertices.trace */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "nuutila - 100 vertices.trace"; sourceTree = "<group>"; };
 		02D9BC2820FF4CD60040303B /* definitions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = definitions.hpp; sourceTree = "<group>"; };
+		02EF311220FF5ED40081A837 /* pearce2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = pearce2; sourceTree = "<group>"; };
+		02EF311320FF5ED40081A837 /* pearce2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pearce2.cpp; sourceTree = "<group>"; };
+		02EF311420FF5ED40081A837 /* pearce_recursive_2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pearce_recursive_2.hpp; sourceTree = "<group>"; };
+		02EF311520FF5ED40081A837 /* pearce2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = pearce2.xcodeproj; sourceTree = "<group>"; };
+		02EF312020FF5F8E0081A837 /* pearce2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = pearce2; path = /Users/andreicapastru/Desktop/sccaa/pr2/build/Release/pearce2; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		02EF311D20FF5F8E0081A837 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		020C569D20FE57220029607C = {
 			isa = PBXGroup;
 			children = (
+				02EF311420FF5ED40081A837 /* pearce_recursive_2.hpp */,
+				02EF311220FF5ED40081A837 /* pearce2 */,
+				02EF311320FF5ED40081A837 /* pearce2.cpp */,
+				02EF311520FF5ED40081A837 /* pearce2.xcodeproj */,
 				02D9BC2820FF4CD60040303B /* definitions.hpp */,
 				02D9BC2620FF4CD60040303B /* makefile */,
-				02D9BC2520FF4CD60040303B /* nuutila */,
-				02D9BC2720FF4CD60040303B /* nuutila - 100 vertices.trace */,
-				02D9BC2320FF4CD60040303B /* nuutila.cpp */,
-				02D9BC2420FF4CD60040303B /* nuutila.hpp */,
 			);
+			sourceTree = "<group>";
+		};
+		02EF311620FF5ED40081A837 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -47,6 +75,26 @@
 		};
 /* End PBXLegacyTarget section */
 
+/* Begin PBXNativeTarget section */
+		02EF311F20FF5F8E0081A837 /* pearce2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02EF312320FF5F8E0081A837 /* Build configuration list for PBXNativeTarget "pearce2" */;
+			buildPhases = (
+				02EF311C20FF5F8E0081A837 /* Sources */,
+				02EF311D20FF5F8E0081A837 /* Frameworks */,
+				02EF311E20FF5F8E0081A837 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = pearce2;
+			productName = pearce2;
+			productReference = 02EF312020FF5F8E0081A837 /* pearce2 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
 /* Begin PBXProject section */
 		020C569E20FE57220029607C /* Project object */ = {
 			isa = PBXProject;
@@ -57,9 +105,12 @@
 					020C56A220FE57220029607C = {
 						CreatedOnToolsVersion = 9.4.1;
 					};
+					02EF311F20FF5F8E0081A837 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
 				};
 			};
-			buildConfigurationList = 020C56A120FE57220029607C /* Build configuration list for PBXProject "nuutila" */;
+			buildConfigurationList = 020C56A120FE57220029607C /* Build configuration list for PBXProject "pearce2" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -67,13 +118,31 @@
 				en,
 			);
 			mainGroup = 020C569D20FE57220029607C;
+			productRefGroup = 020C569D20FE57220029607C;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 02EF311620FF5ED40081A837 /* Products */;
+					ProjectRef = 02EF311520FF5ED40081A837 /* pearce2.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				020C56A220FE57220029607C /* Test */,
+				02EF311F20FF5F8E0081A837 /* pearce2 */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		02EF311C20FF5F8E0081A837 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		020C56A320FE57220029607C /* Debug */ = {
@@ -204,10 +273,32 @@
 			};
 			name = Release;
 		};
+		02EF312420FF5F8E0081A837 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		02EF312520FF5F8E0081A837 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		020C56A120FE57220029607C /* Build configuration list for PBXProject "nuutila" */ = {
+		020C56A120FE57220029607C /* Build configuration list for PBXProject "pearce2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				020C56A320FE57220029607C /* Debug */,
@@ -221,6 +312,15 @@
 			buildConfigurations = (
 				020C56A620FE57220029607C /* Debug */,
 				020C56A720FE57220029607C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02EF312320FF5F8E0081A837 /* Build configuration list for PBXNativeTarget "pearce2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02EF312420FF5F8E0081A837 /* Debug */,
+				02EF312520FF5F8E0081A837 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

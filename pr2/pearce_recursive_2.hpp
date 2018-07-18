@@ -25,6 +25,8 @@ void pr2(graph_t graph_local)
 
   for (int i = 0; i < nn; i++)
   {
+
+    if (i % 500 == 0) cout<<i<<" "<<flush;
     if (r_index[i] == 0)
     {
       pearce_recursive_2(i);
@@ -33,20 +35,20 @@ void pr2(graph_t graph_local)
 
   /* *************************************************  */
   // Used to show the SCC
-  cout << "\nPearce 2  recursive::components: " << nn - c - 1 << endl;
-  for (int comps = 0; comps < nn - c - 1; comps++)
-  {
-    cout << "Component " << comps << ": ";
-    for (int i = 0; i < nn; i++)
-    {
-      if (nn - 1 - comps == r_index[i])
-        { cout<<i<<" ";}
+  // cout << "\nPearce 2  recursive::components: " << nn - c - 1 << endl;
+  // for (int comps = 0; comps < nn - c - 1; comps++)
+  // {
+  //   cout << "Component " << comps << ": ";
+  //   for (int i = 0; i < nn; i++)
+  //   {
+  //     if (nn - 1 - comps == r_index[i])
+  //       { cout<<i<<" ";}
 
-    }
-    cout << endl;
-  }
-    /* *************************************************  */
-  cout << endl;
+  //   }
+  //   cout << endl;
+  // }
+  //   /* *************************************************  */
+  // cout << endl;
 }
 
 void pearce_recursive_2(int v)

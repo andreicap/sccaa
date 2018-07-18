@@ -15,14 +15,19 @@ void pr1(graph_t graph_local)
 
   visited.resize(0);
   visited.resize(nn, false); 
+  
+  r_index.resize(0);
   r_index.resize(nn, 0);
+  
+  inComponent.resize(0);
   inComponent.resize(nn, false);
+  
   vindex = 0;
   c = 0; 
   S = stack<int>();
   for (int i = 0; i < nn; i++)
   {
-    if (i % 500 == 0) cout<<i<<" "<<endl;
+    if (i % 500 == 0) cout<<i<<" "<<flush;
     if (!visited[i])
     {
       pearce_recursive_1(i);

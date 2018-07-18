@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "020C56A220FE57220029607C"
-               BuildableName = "Test"
-               BlueprintName = "Test"
-               ReferencedContainer = "container:Test.xcodeproj">
+               BlueprintIdentifier = "02EF311F20FF5F8E0081A837"
+               BuildableName = "pearce2"
+               BlueprintName = "pearce2"
+               ReferencedContainer = "container:pearce2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,10 +42,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <PathRunnable
-         runnableDebuggingMode = "0"
-         FilePath = "/Users/andreicapastru/Desktop/sccaa/nuutila/nuutila">
-      </PathRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "02EF311F20FF5F8E0081A837"
+            BuildableName = "pearce2"
+            BlueprintName = "pearce2"
+            ReferencedContainer = "container:pearce2.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
          <AdditionalOption
             key = "MallocStackLogging"
@@ -73,10 +79,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "020C56A220FE57220029607C"
-            BuildableName = "Test"
-            BlueprintName = "Test"
-            ReferencedContainer = "container:Test.xcodeproj">
+            BlueprintIdentifier = "02EF311F20FF5F8E0081A837"
+            BuildableName = "pearce2"
+            BlueprintName = "pearce2"
+            ReferencedContainer = "container:pearce2.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

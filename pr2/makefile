@@ -1,2 +1,3 @@
-boost: main.cpp
-	g++ main.cpp -o main -std=c++11
+boost: pearce2.cpp
+	g++ pearce2.cpp -o pearce2 -std=c++11
+	

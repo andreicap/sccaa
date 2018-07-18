@@ -46,6 +46,15 @@
          runnableDebuggingMode = "0"
          FilePath = "/Users/andreicapastru/Desktop/sccaa/boost_tarjan/boost_tarjan">
       </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "020C56A220FE57220029607C"
+            BuildableName = "Test"
+            BlueprintName = "Test"
+            ReferencedContainer = "container:boost_tarjan.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
          <AdditionalOption
             key = "MallocStackLogging"
