@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
   graph_t g;
   vector<vertex_t> vertices;
 
-  int v_number = 100000;
+  int v_number = 10000;
   
   int e_number = v_number * 2;
 
