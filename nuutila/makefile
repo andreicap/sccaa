@@ -1,2 +1,2 @@
-boost: main.cpp
-	g++ main.cpp -o main -std=c++11
+boost: nuutila.cpp
+	g++ nuutila.cpp -o nuutila -std=c++11

@@ -50,12 +50,12 @@ typedef boost::erdos_renyi_iterator<boost::minstd_rand, graph_t> ERGen;
 
 
 //vars used in all agorithms
-vector<bool> visited;
-vector<int> r_index;
-vector<bool> inComponent;
-stack<int> S;
-int vindex;
-int c; // component number.
+// vector<bool> visited;
+// vector<int> r_index;
+// vector<bool> inComponent;
+// stack<int> S;
+// int vindex;
+// int c; // component number.
 
 graph_t *g;
 
@@ -63,43 +63,43 @@ graph_t *g;
 
 //====utils==================================================================
 
-//print graph
-void print_graph(const graph_t &graph)
-{
-  cout<<'\n';
-  cout << "Graph ->" << "vertices: "<< boost::num_vertices(graph) << ", edges: " << boost::num_edges(graph) << endl;
-  auto edges = boost::edges(graph);
-  for (auto it = edges.first; it != edges.second; ++it)
-  {
-    cout << boost::source(*it, graph) << " -> "
-    << boost::target(*it, graph) << endl;
-  }
-}
+// //print graph
+// void print_graph(const graph_t &graph)
+// {
+//   cout<<'\n';
+//   cout << "Graph ->" << "vertices: "<< boost::num_vertices(graph) << ", edges: " << boost::num_edges(graph) << endl;
+//   auto edges = boost::edges(graph);
+//   for (auto it = edges.first; it != edges.second; ++it)
+//   {
+//     cout << boost::source(*it, graph) << " -> "
+//     << boost::target(*it, graph) << endl;
+//   }
+// }
 
 
 // boost library SCC detection 
 // used to countercheck the results 
 void readSCC(graph_t graph_in)
 {
-  cout<<'\n';
+  cout<<"Boost Tarjan Start\n";
   int nn = boost::num_vertices(graph_in);
   vector<int> cc(nn);
   int num = strong_components(graph_in, make_iterator_property_map(cc.begin(), get(boost::vertex_index, graph_in), cc[0]));
 
-  cout << "Boost:: Total number of components: " << num << endl;
+  // cout << "Boost:: Total number of components: " << num << endl;
 
-  for (int comps=0; comps<num; comps++)
-  {
+ //  for (int comps=0; comps<num; comps++)
+ //  {
 
-    cout << "Compenent " << comps  << ": ";
-    for (int i = 0; i < cc.size(); i++)
-    {
-      if (comps == cc[i])
-       cout<<i<<' ';
-   }
-   cout<<endl;
- }
- cout<<'\n';
+ //    cout << "Compenent " << comps  << ": ";
+ //    for (int i = 0; i < cc.size(); i++)
+ //    {
+ //      if (comps == cc[i])
+ //       cout<<i<<' ';
+ //   }
+ //   cout<<endl;
+ // }
+ cout<<"Boost::Tarjan done";
  cout<<endl;
 }
 

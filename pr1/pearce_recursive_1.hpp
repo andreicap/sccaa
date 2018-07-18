@@ -22,23 +22,25 @@ void pr1(graph_t graph_local)
   S = stack<int>();
   for (int i = 0; i < nn; i++)
   {
+    if (i % 500 == 0) cout<<i<<" "<<endl;
     if (!visited[i])
     {
       pearce_recursive_1(i);
     }
   }
-  cout << "\nPearce recursive::components: " << c << endl;
-  for (int comps=0; comps<c; comps++)
-  {
-    cout << "Component " << comps  << ": ";
-    for (int i = 0; i < r_index.size(); i++)
-    {
-      if (comps == r_index[i])
-        cout<<i<<' ';
-    }
-    cout<<endl;
-  }   
-  cout<<endl;
+
+  // cout << "\nPearce recursive::components: " << c << endl;
+  // for (int comps=0; comps<c; comps++)
+  // {
+  //   cout << "Component " << comps  << ": ";
+  //   for (int i = 0; i < r_index.size(); i++)
+  //   {
+  //     if (comps == r_index[i])
+  //       cout<<i<<' ';
+  //   }
+  //   cout<<endl;
+  // }   
+  // cout<<endl;
 
 }
 

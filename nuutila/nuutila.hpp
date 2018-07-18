@@ -26,7 +26,6 @@ void nuutila_recursive(graph_t graph_local)
   inComponent.resize(nn, false);
   
   S = stack<int>();
-  vindex = 0;
   c = 0;
 
   for (int i = 0; i < nn; i++)
@@ -39,21 +38,22 @@ void nuutila_recursive(graph_t graph_local)
 
 
 /* *************************************************  */
-  vector<int> scc;
-  scc =root; 
-  sort(scc.begin(), scc.end());
-  scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
-  cout << "\n Nutilla ::components: " << scc.size() << endl;
-  for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
-    std::cout << '\n';
-    cout << "Component: ";
-    for (int i = 0; i < nn; i++)
-    {  
-      if (*ip == root[i]){
-        cout << i << ' ';
-      }
-    }
-  }
+  
+  // vector<int> scc;
+  // scc = root; 
+  // sort(scc.begin(), scc.end());
+  // scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
+  // cout << "\n Nutilla ::components: " << scc.size() << endl;
+  // for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
+  //   std::cout << '\n';
+  //   cout << "Component: ";
+  //   for (int i = 0; i < nn; i++)
+  //   {  
+  //     if (*ip == root[i]){
+  //       cout << i << ' ';
+  //     }
+  //   }
+  // }
 
     //cout <<"\n nutilla root \n";
   //for (auto i = root.begin(); i != root.end(); ++i)

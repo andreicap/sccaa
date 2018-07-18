@@ -1,7 +1,7 @@
 #include "definitions.hpp"
-#include "pearce_recursive_1.hpp"
-#include "pearce_recursive_2.hpp"
-#include "tarjan.hpp"
+// #include "pearce_recursive_1.hpp"
+// #include "pearce_recursive_2.hpp"
+// #include "tarjan.hpp"
 #include "nuutila.hpp"
 
 int main(int argc, char const *argv[])
@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
   graph_t g;
   vector<vertex_t> vertices;
 
-  int v_number = 1000000;
+  int v_number = 10000;
   
   int e_number = v_number * 2;
 
@@ -62,20 +62,22 @@ int main(int argc, char const *argv[])
   size_t n = boost::num_vertices(g);
   cout << "generated " << e << " edges, " << n << " vertices\n";
 
-  print_graph(g);
+  // print_graph(g);
 
-  //boost implementation
-  readSCC(g);
+  // //boost implementation
+  // readSCC(g);
 
-  //pearce recursive first implementation
-  pr1 (g);
+  // //pearce recursive first implementation
+  // pr1 (g);‰
   
-  //pearce improved
-  pr2 (g);
+  // //pearce improved
+  // pr2 (g);
 
 
   //nuutila implementaion
+  cout<< "Start Nuutila \n";
   nuutila_recursive(g);
+  cout<< "Finish Nuutila \n";
 
   // tarjan_recursive(g);
   
