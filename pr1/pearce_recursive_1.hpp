@@ -6,6 +6,10 @@ Based on Pearce, David. "A Space Efficient Algorithm for Detecting Strongly Conn
 Goal is to find SCC given a graph  
  ----------------------------------------------------------------------------------------  */
 
+#include <thread>
+#include <chrono>
+
+int max_stack_size = 0;
 void pearce_recursive_1(int v);
 
 void pr1(graph_t graph_local)
@@ -13,27 +17,35 @@ void pr1(graph_t graph_local)
   g = &graph_local;
   size_t nn = boost::num_vertices(graph_local);  
 
-  visited.resize(0);
+  cout<<"visited alloc"<<endl;
+
   visited.resize(nn, false); 
-  
-  r_index.resize(0);
+  this_thread::sleep_for(std::chrono::milliseconds(10000));
+
+  cout<<"rindex alloc"<<endl;
   r_index.resize(nn, 0);
-  
+  this_thread::sleep_for(std::chrono::milliseconds(10000));
+
   inComponent.resize(0);
   inComponent.resize(nn, false);
   
   vindex = 0;
   c = 0; 
   S = stack<int>();
+
   for (int i = 0; i < nn; i++)
   {
-    if (i % 500 == 0) cout<<i<<" "<<flush;
+    if (i % 500 == 0) 
+    {
+      cout<<i<<" "<<endl;
+      cout<<"Stack size: "<< max_stack_size << endl;
+    }
     if (!visited[i])
     {
       pearce_recursive_1(i);
     }
-  }
 
+  }
   // cout << "\nPearce recursive::components: " << c << endl;
   // for (int comps=0; comps<c; comps++)
   // {
@@ -85,6 +97,7 @@ void pearce_recursive_1(int v)
 
     if (root)
     {
+      if (max_stack_size < S.size()) max_stack_size = S.size();
       inComponent[v] = true;
      // while (!S.empty()) {
         // all nodes are SCC with the local root until the visitation is grater

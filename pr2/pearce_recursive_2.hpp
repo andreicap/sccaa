@@ -25,7 +25,6 @@ void pr2(graph_t graph_local)
 
   for (int i = 0; i < nn; i++)
   {
-
     if (i % 500 == 0) cout<<i<<" "<<flush;
     if (r_index[i] == 0)
     {

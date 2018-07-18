@@ -1,5 +1,7 @@
 #include "definitions.hpp"
 #include "pearce_recursive_1.hpp"
+
+
 // #include "pearce_recursive_2.hpp"
 // #include "tarjan.hpp"
 // #include "nuutila.hpp"
@@ -10,14 +12,15 @@ int main(int argc, char const *argv[])
   vector<vertex_t> vertices;
 
   int v_number = 10000;
-  
   int e_number = v_number * 2;
 
   //boost random generator
   boost::mt19937 rng;
   rng.seed(uint32_t(time(0)));
+  this_thread::sleep_for(std::chrono::milliseconds(2000));
   boost::generate_random_graph(g, v_number, e_number, rng);
-  
+  this_thread::sleep_for(std::chrono::milliseconds(2000));
+
 
   // erdos random graph generator 
   

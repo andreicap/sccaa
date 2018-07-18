@@ -19,13 +19,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0263ED4820FFA178008DDDDE /* pearce2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = pearce2; path = /Users/andreicapastru/Desktop/sccaa/pr2/build/Debug/pearce2; sourceTree = "<absolute>"; };
 		02D9BC2620FF4CD60040303B /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 		02D9BC2820FF4CD60040303B /* definitions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = definitions.hpp; sourceTree = "<group>"; };
 		02EF311220FF5ED40081A837 /* pearce2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = pearce2; sourceTree = "<group>"; };
 		02EF311320FF5ED40081A837 /* pearce2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pearce2.cpp; sourceTree = "<group>"; };
 		02EF311420FF5ED40081A837 /* pearce_recursive_2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pearce_recursive_2.hpp; sourceTree = "<group>"; };
 		02EF311520FF5ED40081A837 /* pearce2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = pearce2.xcodeproj; sourceTree = "<group>"; };
-		02EF312020FF5F8E0081A837 /* pearce2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = pearce2; path = /Users/andreicapastru/Desktop/sccaa/pr2/build/Release/pearce2; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +90,7 @@
 			);
 			name = pearce2;
 			productName = pearce2;
-			productReference = 02EF312020FF5F8E0081A837 /* pearce2 */;
+			productReference = 0263ED4820FFA178008DDDDE /* pearce2 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */

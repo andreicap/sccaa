@@ -42,8 +42,11 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/Users/andreicapastru/Desktop/sccaa/pr2/pearce2">
+      </PathRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "02EF311F20FF5F8E0081A837"
@@ -51,7 +54,7 @@
             BlueprintName = "pearce2"
             ReferencedContainer = "container:pearce2.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
          <AdditionalOption
             key = "MallocStackLogging"
