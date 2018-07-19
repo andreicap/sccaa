@@ -53,26 +53,23 @@ void pearce_recursive_1(int v)
   vindex = vindex + 1;
   inComponent[v] = false;
   auto edges = boost::edges(*g);
-  for (auto it = edges.first; it != edges.second; ++it)
+  typename boost::graph_traits<graph_t>::out_edge_iterator it, it_end;
+  for (boost::tie(it, it_end) = out_edges(v, *g); it != it_end; ++it)
   {
     int w = boost::target(*it, *g);
-    int s = boost::source(*it, *g);
 
-    if (v == s)
+    if (!visited[w])
     {
-      if (!visited[w])
-      {
-        pearce_recursive_1(w);
-      }
+      pearce_recursive_1(w);
+    }
 
-      for (auto i = r_index.begin(); i != r_index.end(); ++i)
+    for (auto i = r_index.begin(); i != r_index.end(); ++i)
       // if rindex[v] has not been updated 
       // or not  already been assigned to a component
-        if (!(inComponent[w]) && (r_index[w] < r_index[v]))
-        {
-          r_index[v] = r_index[w];
-          root = false;
-        }
+      if (!(inComponent[w]) && (r_index[w] < r_index[v]))
+      {
+        r_index[v] = r_index[w];
+        root = false;
       }
     }
 
@@ -81,13 +78,13 @@ void pearce_recursive_1(int v)
       inComponent[v] = true;
      // while (!S.empty()) {
         // all nodes are SCC with the local root until the visitation is grater
-        while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
-        {
-          int w = S.top();
-          S.pop();
-          r_index[w] = c;
-          inComponent[w] = true;
-        }
+      while ((!S.empty()) && (r_index[v] <= r_index[S.top()]))
+      {
+        int w = S.top();
+        S.pop();
+        r_index[w] = c;
+        inComponent[w] = true;
+      }
      // }
       r_index[v] = c;
       c = c + 1;

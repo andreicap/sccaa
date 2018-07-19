@@ -70,21 +70,17 @@ void nuutila(int v)
   root[v] = v;
   inComponent[v] = false;
   auto edges = boost::edges(*g);
-  for (auto it = edges.first; it != edges.second; ++it)
+  typename boost::graph_traits<graph_t>::out_edge_iterator it, it_end;
+  for (boost::tie(it, it_end) = out_edges(v, *g); it != it_end; ++it)
   {
-
     int w = boost::target(*it, *g);
-    int s = boost::source(*it, *g);
-    if (v == s)
+    if (!visited[w])
     {
-      if (!visited[w])
-      {
-        nuutila(w);
-      }
-      if (!inComponent[w])
-      {
-        root[v] = min(root[v], root[w]);
-      }
+      nuutila(w);
+    }
+    if (!inComponent[w])
+    {
+      root[v] = min(root[v], root[w]);
     }
   }
   if (root[v] == v)

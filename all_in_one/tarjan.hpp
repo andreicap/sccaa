@@ -7,8 +7,10 @@ Goal is to find local roots of the components
  ----------------------------------------------------------------------------------------  */
 
 vector<int> root;
+vector<int> discover_time;
 void tarjan(int v);
 void tarjan2(int v);
+int dfsi;
 //int iter;
 
 
@@ -28,12 +30,22 @@ void tarjan_recursive(graph_t graph_local)
   g = &graph_local;
 
   size_t nn = boost::num_vertices(graph_local);  
+  
   visited.resize(0); 
   visited.resize(nn, false); 
+  
   root.resize(0);
   root.resize(nn, 32000);
+  
   inComponent.resize(0);
   inComponent.resize(nn, false);
+
+  discover_time.resize(0);
+  discover_time.resize(nn, 0);
+
+  dfsi = 0;
+
+
   S = stack<int>();
   c = 0;
   vindex = 0;
@@ -84,28 +96,27 @@ void tarjan(int v)
   root[v] = v;
   // used to distingish between  nodes belonging to the same component
   inComponent[v] = false;
+  discover_time[v] = dfsi++;
+
   // push visited vertices to the stack S
   S.push(v);
   // retrieves all edges from the graph 
   auto edges = boost::edges(*g);
   // iterates over the edges 
-  for (auto it = edges.first; it != edges.second; ++it)
-  {
+  typename boost::graph_traits<graph_t>::out_edge_iterator it, it_end;
+  for (boost::tie(it, it_end) = out_edges(v, *g); it != it_end; ++it)
+  { 
     int w = boost::target(*it, *g);
-    int s = boost::source(*it, *g);
-    // if vertex v is equal to source node of the edge 
-    if (v == s )
-    {
+    // if vertex v is equal to source node of the edges
       // visit in DF order if not visited already
-      if (!visited[w])
-      {
-        tarjan(w);
-      }
-      if (!inComponent[w])
-      {
+    if (!visited[w])
+    {
+      tarjan(w);
+    }
+    if (!inComponent[w])
+    {
         // set root vertex v to the minimum between the own value and target vertex 
-        root[v] = min(root[v], root[w]);
-      }
+      root[v] = (discover_time[v] < discover_time[w]) ? root[v] : root[w];;
     }
   }
   // vertex v is the root
