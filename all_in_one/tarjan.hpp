@@ -109,6 +109,7 @@ void tarjan(int v)
       // visit in DF order if not visited already
     if (!visited[w])
     {
+     
       tarjan(w);
     }
     if (!inComponent[w])
