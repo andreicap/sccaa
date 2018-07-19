@@ -57,24 +57,22 @@ void pearce_recursive_2(int v)
   r_index[v] = vindex;
   vindex = vindex + 1;
   auto edges = boost::edges(*g);
-  for (auto it = edges.first; it != edges.second; ++it)
+  typename boost::graph_traits<graph_t>::out_edge_iterator it, it_end;
+  for (boost::tie(it, it_end) = out_edges(v, *g); it != it_end; ++it)
   {
     int w = boost::target(*it, *g);
-    int s = boost::source(*it, *g);
-    if (v == s)
+    
+    // std::cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
+    // if not visited
+    if (r_index[w] == 0)
     {
-        // std::cout << "\n Visit for node: " << v << ", edge: " << s << "->" << w << "\n";
-        // if not visited
-      if (r_index[w] == 0)
-      {
-        pearce_recursive_2(w);
-      }
+      pearce_recursive_2(w);
+    }
         // decide whether is a local root or not based on the visitation
-      if (r_index[w] < r_index[v])
-      {
-        r_index[v] = r_index[w];
-        root = false;
-      }
+    if (r_index[w] < r_index[v])
+    {
+      r_index[v] = r_index[w];
+      root = false;
     }
   }
   if (root)
