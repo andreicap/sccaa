@@ -24,6 +24,12 @@ void nuutila_recursive(graph_t graph_local)
   
   inComponent.resize(0);
   inComponent.resize(nn, false);
+
+  discover_time.resize(0);
+  discover_time.resize(nn);
+
+  dfsi = 0;
+
   
   S = stack<int>();
   vindex = 0;
@@ -69,6 +75,8 @@ void nuutila(int v)
   visited[v] = true;
   root[v] = v;
   inComponent[v] = false;
+  discover_time[v] = dfsi++;
+
   auto edges = boost::edges(*g);
   typename boost::graph_traits<graph_t>::out_edge_iterator it, it_end;
   for (boost::tie(it, it_end) = out_edges(v, *g); it != it_end; ++it)
@@ -80,7 +88,7 @@ void nuutila(int v)
     }
     if (!inComponent[w])
     {
-      root[v] = min(root[v], root[w]);
+      root[v] = (discover_time[v] < discover_time[w]) ? v : w;
     }
   }
   if (root[v] == v)

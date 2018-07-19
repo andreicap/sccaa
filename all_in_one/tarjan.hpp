@@ -7,10 +7,8 @@ Goal is to find local roots of the components
  ----------------------------------------------------------------------------------------  */
 
 vector<int> root;
-vector<int> discover_time;
 void tarjan(int v);
-void tarjan2(int v);
-int dfsi;
+// void tarjan2(int v);
 //int iter;
 
 
@@ -41,7 +39,7 @@ void tarjan_recursive(graph_t graph_local)
   inComponent.resize(nn, false);
 
   discover_time.resize(0);
-  discover_time.resize(nn, 0);
+  discover_time.resize(nn);
 
   dfsi = 0;
 
@@ -92,16 +90,16 @@ void tarjan_recursive(graph_t graph_local)
 void tarjan(int v)
 {
   visited[v] = true;
+  discover_time[v] = dfsi++;
+
   // vertex v is root candidate 
   root[v] = v;
   // used to distingish between  nodes belonging to the same component
   inComponent[v] = false;
-  discover_time[v] = dfsi++;
 
   // push visited vertices to the stack S
   S.push(v);
   // retrieves all edges from the graph 
-  auto edges = boost::edges(*g);
   // iterates over the edges 
   typename boost::graph_traits<graph_t>::out_edge_iterator it, it_end;
   for (boost::tie(it, it_end) = out_edges(v, *g); it != it_end; ++it)
@@ -114,9 +112,8 @@ void tarjan(int v)
       tarjan(w);
     }
     if (!inComponent[w])
-    {
-        // set root vertex v to the minimum between the own value and target vertex 
-      root[v] = (discover_time[v] < discover_time[w]) ? root[v] : root[w];;
+    {// set root vertex v to the minimum between the own value and target vertex 
+      root[v] = (discover_time[v] < discover_time[w]) ? v : w;
     }
   }
   // vertex v is the root

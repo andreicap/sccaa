@@ -24,7 +24,6 @@ void nuutila_recursive(graph_t graph_local)
   
   inComponent.resize(0);
   inComponent.resize(nn, false);
-  
 
   discover_time.resize(nn, 0);
 

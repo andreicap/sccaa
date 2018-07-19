@@ -56,6 +56,8 @@ vector<bool> inComponent;
 stack<int> S;
 int vindex;
 int c; // component number.
+vector<int> discover_time;
+int dfsi;
 
 graph_t *g;
 
