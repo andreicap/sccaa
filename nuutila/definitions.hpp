@@ -52,8 +52,10 @@ typedef boost::erdos_renyi_iterator<boost::minstd_rand, graph_t> ERGen;
 //vars used in all agorithms
 vector<bool> visited;
 vector<int> r_index;
+vector<int> discover_time;
 vector<bool> inComponent;
 stack<int> S;
+int dfs_time = 0;
 vector<int> root;
 // int vindex;
 int c; // component number.
@@ -80,28 +82,28 @@ graph_t *g;
 
 // boost library SCC detection 
 // used to countercheck the results 
-// void readSCC(graph_t graph_in)
-// {
-//   cout<<'\n';
-//   int nn = boost::num_vertices(graph_in);
-//   vector<int> cc(nn);
-//   int num = strong_components(graph_in, make_iterator_property_map(cc.begin(), get(boost::vertex_index, graph_in), cc[0]));
+void readSCC(graph_t graph_in)
+{
+  cout<<'\n';
+  int nn = boost::num_vertices(graph_in);
+  vector<int> cc(nn);
+  int num = strong_components(graph_in, make_iterator_property_map(cc.begin(), get(boost::vertex_index, graph_in), cc[0]));
 
-//   cout << "Boost:: Total number of components: " << num << endl;
+  cout << "Boost:: Total number of components: " << num << endl;
 
-//   for (int comps=0; comps<num; comps++)
-//   {
+  for (int comps=0; comps<num; comps++)
+  {
 
-//     cout << "Compenent " << comps  << ": ";
-//     for (int i = 0; i < cc.size(); i++)
-//     {
-//       if (comps == cc[i])
-//        cout<<i<<' ';
-//    }
-//    cout<<endl;
-//  }
-//  cout<<'\n';
-//  cout<<endl;
-// }
+    cout << "Compenent " << comps  << ": ";
+    for (int i = 0; i < cc.size(); i++)
+    {
+      if (comps == cc[i])
+       cout<<i<<' ';
+   }
+   cout<<endl;
+ }
+ cout<<'\n';
+ cout<<endl;
+}
 
 #endif

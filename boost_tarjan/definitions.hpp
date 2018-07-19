@@ -85,7 +85,7 @@ void readSCC(graph_t graph_in)
   int nn = boost::num_vertices(graph_in);
   vector<int> cc(nn);
   int num = strong_components(graph_in, make_iterator_property_map(cc.begin(), get(boost::vertex_index, graph_in), cc[0]));
-
+ 
   // cout << "Boost:: Total number of components: " << num << endl;
 
  //  for (int comps=0; comps<num; comps++)

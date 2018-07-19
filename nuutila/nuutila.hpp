@@ -25,6 +25,9 @@ void nuutila_recursive(graph_t graph_local)
   inComponent.resize(0);
   inComponent.resize(nn, false);
   
+
+  discover_time.resize(nn, 0);
+
   S = stack<int>();
   c = 0;
 
@@ -36,23 +39,28 @@ void nuutila_recursive(graph_t graph_local)
     }
   }
 
-
 /* *************************************************  */
   
-  // vector<int> scc;
-  // scc = root; 
-  // sort(scc.begin(), scc.end());
-  // scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
-  // cout << "\n Nutilla ::components: " << scc.size() << endl;
-  // for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
-  //   std::cout << '\n';
-  //   cout << "Component: ";
-  //   for (int i = 0; i < nn; i++)
-  //   {  
-  //     if (*ip == root[i]){
-  //       cout << i << ' ';
-  //     }
-  //   }
+  vector<int> scc;
+  scc = root; 
+  sort(scc.begin(), scc.end());
+  scc.erase(std::unique(scc.begin(), scc.end()), scc.end());
+  cout << "\n Nutilla ::components: " << scc.size() << endl;
+  for (auto ip = scc.begin(); ip != scc.end(); ++ip) {
+    std::cout << '\n';
+    cout << "Component "<< scc.end() - ip << ": ";
+    for (int i = 0; i < nn; i++)
+    {  
+      if (*ip == root[i]){
+        cout << i << ' ';
+      }
+    }
+  }
+
+  // cout <<endl << "inComponent "<<endl;
+  // for (int i = 0; i < nn; i++)
+  // {  
+  //     cout << inComponent[i] << ' ';
   // }
 
     //cout <<"\n nutilla root \n";
@@ -67,6 +75,8 @@ void nuutila_recursive(graph_t graph_local)
 void nuutila(int v)
 {
   visited[v] = true;
+  discover_time[v] = dfs_time++;
+  // cout<< "v = " << v << ", discover_time = " << dfs_time << endl;
   root[v] = v;
   inComponent[v] = false;
   auto edges = boost::edges(*g);
@@ -83,7 +93,7 @@ void nuutila(int v)
       }
       if (!inComponent[w])
       {
-        root[v] = min(root[v], root[w]);
+        root[v] = (discover_time[v] < discover_time[w]) ? root[v] : root[w];
       }
     }
   }
@@ -92,15 +102,14 @@ void nuutila(int v)
     inComponent[v] = true;
     // remove from the stack  until the top is greater then root node
     int w;
-    do
+    while ( !S.empty() && S.top() > v)
     {
     // trivial component non root 
-      if (S.empty()) break;
       w = S.top();
       S.pop();
       inComponent[w] = true;
      // cout << " "<< w;
-    } while ( w > v );
+    }
     //cout << " " << v << "\n";
     c++;
   }

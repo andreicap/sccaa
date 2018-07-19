@@ -9,9 +9,9 @@ int main(int argc, char const *argv[])
   graph_t g;
   vector<vertex_t> vertices;
 
-  int v_number = 1000000;
+  int v_number = 15;
   
-  int e_number = v_number * 2;
+  int e_number = v_number * 2.1;
 
   //boost random generator
   boost::mt19937 rng;
@@ -77,7 +77,7 @@ int main(int argc, char const *argv[])
   //nuutila implementaion
   nuutila_recursive(g);
 
-  // tarjan_recursive(g);
+  tarjan_recursive(g);
   
 
   return 0;

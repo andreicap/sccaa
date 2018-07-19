@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
   graph_t g;
   vector<vertex_t> vertices;
 
-  int v_number = 10000;
+  int v_number = 15;
   
   int e_number = v_number * 2;
 
@@ -65,7 +65,7 @@ int main(int argc, char const *argv[])
   // print_graph(g);
 
   // //boost implementation
-  // readSCC(g);
+  readSCC(g);
 
   // //pearce recursive first implementation
   // pr1 (g);‰

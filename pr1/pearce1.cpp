@@ -17,9 +17,9 @@ int main(int argc, char const *argv[])
   //boost random generator
   boost::mt19937 rng;
   rng.seed(uint32_t(time(0)));
-  this_thread::sleep_for(std::chrono::milliseconds(2000));
+  // this_thread::sleep_for(std::chrono::milliseconds(2000));
   boost::generate_random_graph(g, v_number, e_number, rng);
-  this_thread::sleep_for(std::chrono::milliseconds(2000));
+  // this_thread::sleep_for(std::chrono::milliseconds(2000));
 
 
   // erdos random graph generator 

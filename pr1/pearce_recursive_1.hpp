@@ -12,19 +12,22 @@ Goal is to find SCC given a graph
 int max_stack_size = 0;
 void pearce_recursive_1(int v);
 
+
 void pr1(graph_t graph_local)
 {
   g = &graph_local;
+  // std::pair <graph_t, graph_t> *edges  = boost::edges(*g);
+
   size_t nn = boost::num_vertices(graph_local);  
 
-  cout<<"visited alloc"<<endl;
+  // cout<<"visited alloc"<<endl;
 
   visited.resize(nn, false); 
-  this_thread::sleep_for(std::chrono::milliseconds(10000));
+  // this_thread::sleep_for(std::chrono::milliseconds(10000));
 
-  cout<<"rindex alloc"<<endl;
+  // cout<<"rindex alloc"<<endl;
   r_index.resize(nn, 0);
-  this_thread::sleep_for(std::chrono::milliseconds(10000));
+  // this_thread::sleep_for(std::chrono::milliseconds(10000));
 
   inComponent.resize(0);
   inComponent.resize(nn, false);
@@ -33,12 +36,13 @@ void pr1(graph_t graph_local)
   c = 0; 
   S = stack<int>();
 
+
   for (int i = 0; i < nn; i++)
   {
     if (i % 500 == 0) 
     {
       cout<<i<<" "<<endl;
-      cout<<"Stack size: "<< max_stack_size << endl;
+      // cout<<"Stack size: "<< max_stack_size << endl;
     }
     if (!visited[i])
     {
@@ -57,7 +61,7 @@ void pr1(graph_t graph_local)
   //   }
   //   cout<<endl;
   // }   
-  // cout<<endl;
+  cout<<endl;
 
 }
 
@@ -71,27 +75,24 @@ void pearce_recursive_1(int v)
   r_index[v] = vindex;
   vindex = vindex + 1;
   inComponent[v] = false;
-  auto edges = boost::edges(*g);
-  for (auto it = edges.first; it != edges.second; ++it)
+  // edges = boost::edges(*g);
+  typename boost::graph_traits<graph_t>::out_edge_iterator it, it_end;
+  for (boost::tie(it, it_end) = out_edges(v, *g); it != it_end; ++it)
   {
     int w = boost::target(*it, *g);
-    int s = boost::source(*it, *g);
 
-    if (v == s)
+    if (!visited[w])
     {
-      if (!visited[w])
-      {
-        pearce_recursive_1(w);
-      }
+      pearce_recursive_1(w);
+    }
 
-      for (auto i = r_index.begin(); i != r_index.end(); ++i)
-      // if rindex[v] has not been updated 
-      // or not  already been assigned to a component
-        if (!(inComponent[w]) && (r_index[w] < r_index[v]))
-        {
-          r_index[v] = r_index[w];
-          root = false;
-        }
+    for (auto i = r_index.begin(); i != r_index.end(); ++i)
+    // if rindex[v] has not been updated 
+    // or not  already been assigned to a component
+      if (!(inComponent[w]) && (r_index[w] < r_index[v]))
+      {
+        r_index[v] = r_index[w];
+        root = false;
       }
     }
 

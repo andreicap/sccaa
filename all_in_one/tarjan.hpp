@@ -31,7 +31,7 @@ void tarjan_recursive(graph_t graph_local)
   visited.resize(0); 
   visited.resize(nn, false); 
   root.resize(0);
-  root.resize(nn, 0);
+  root.resize(nn, 32000);
   inComponent.resize(0);
   inComponent.resize(nn, false);
   S = stack<int>();
