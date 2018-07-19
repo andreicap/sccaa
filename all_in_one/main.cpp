@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
   graph_t g;
   vector<vertex_t> vertices;
 
-  int v_number = 15;
+  int v_number = stoi(argv[1]);
   
   int e_number = v_number * 2.1;
 
@@ -52,9 +52,9 @@ int main(int argc, char const *argv[])
       {
         add_edge(vertices.at(source), vertices.at(floor), g);
         // disallow self loops
-        floor++;
+        floor = floor +1;
       }
-    } while (floor <= v_number);
+    } while (floor < v_number);
   }
 
   /* *************************************************  */

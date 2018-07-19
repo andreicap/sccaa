@@ -113,7 +113,7 @@ void tarjan(int v)
     }
     if (!inComponent[w])
     {// set root vertex v to the minimum between the own value and target vertex 
-      root[v] = (discover_time[v] < discover_time[w]) ? v : w;
+      root[v] = (discover_time[root[v]] < discover_time[root[w]]) ? root[v] : root[w];
     }
   }
   // vertex v is the root

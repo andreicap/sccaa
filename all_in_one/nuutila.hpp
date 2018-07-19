@@ -88,7 +88,7 @@ void nuutila(int v)
     }
     if (!inComponent[w])
     {
-      root[v] = (discover_time[v] < discover_time[w]) ? v : w;
+      root[v] = (discover_time[root[v]] < discover_time[root[w]]) ? root[v] : root[w];
     }
   }
   if (root[v] == v)
@@ -104,7 +104,7 @@ void nuutila(int v)
       S.pop();
       inComponent[w] = true;
      // cout << " "<< w;
-    } while ( w > v );
+    } while ( w != v );
     //cout << " " << v << "\n";
     c++;
   }

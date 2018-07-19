@@ -90,7 +90,7 @@ void nuutila(int v)
     }
     if (!inComponent[w])
     {
-      root[v] = (discover_time[v] < discover_time[w]) ? root[v] : root[w];
+      root[v] = (discover_time[root[v]] < discover_time[root[w]]) ? root[v] : root[w];
     }
   }
   if (root[v] == v)
