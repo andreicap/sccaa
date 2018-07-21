@@ -11,6 +11,8 @@ Optionally, there are implemented Erdos Randomg graph generator and a simple gen
 How to run: 
 
 ```
+git clone https://github.com/andreicap/sccaa.git
+cd all_in_one
 make
 ./main 10
 ```
